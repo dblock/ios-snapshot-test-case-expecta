@@ -8,9 +8,10 @@
 
 #import "Expecta.h"
 
-#ifndef FB_REFERENCE_IMAGE_DIR
-#error FB_REFERENCE_IMAGE_DIR is not defined. Define it in GCC_PREPROCESSOR_DEFINITIONS to point to a directory.
-#endif
+@interface EXPExpectFBSnapshotTest : NSObject
+    @property (nonatomic,strong) NSString *referenceImagesDirectory;
+    +(id)instance;
+@end
 
 EXPMatcherInterface(haveValidSnapshot, (NSString * snapshot));
 EXPMatcherInterface(recordSnapshot, (NSString * snapshot));

@@ -30,6 +30,11 @@ Use `expect(view).to.recordSnapshot(@"unique snapshot name")` to record a snapsh
 
 SpecBegin(FBExampleView)
 
+beforeAll(^{
+    NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR];
+    [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory:referenceImagesDirectory];
+});
+
 it(@"matches view", ^{
     FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
     // expect(view).to.recordSnapshot(@"FBExampleView");

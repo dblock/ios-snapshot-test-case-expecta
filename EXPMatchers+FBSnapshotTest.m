@@ -11,7 +11,19 @@
 #import "FBTestSnapshotController.h"
 #import "FBSnapshotTestRecorder.h"
 
-@implementation EXPExpect (FBSnapshotTest)
+@implementation EXPExpectFBSnapshotTest
+
+@synthesize referenceImagesDirectory;
+
++(id)instance {
+    static EXPExpectFBSnapshotTest *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
+
 +(BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer
                            snapshot:(NSString *)snapshot
                            testCase:(id)testCase
@@ -21,10 +33,13 @@
     FBSnapshotTestRecorder * recorder = [[FBSnapshotTestRecorder alloc] initWithController:snapshotController];
     recorder.selector = NSSelectorFromString(snapshot);
     recorder.recordMode = record;
-    NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR];
+    NSString * referenceImageDirectory = [[EXPExpectFBSnapshotTest instance] referenceImagesDirectory];
+    if (! referenceImageDirectory) {
+        [NSException raise:@"Missing value for referenceImageDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];
+    }
     __block NSError *error = nil;
     return [recorder compareSnapshotOfViewOrLayer:viewOrLayer
-                         referenceImagesDirectory:referenceImagesDirectory
+                         referenceImagesDirectory:referenceImageDirectory
                                        identifier:nil
                                             error:& error];
 }
@@ -32,7 +47,7 @@
 
 EXPMatcherImplementationBegin(haveValidSnapshot, (NSString * snapshot)) {
     match(^BOOL{
-        return [EXPExpect compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO];
+        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO];
     });
 
     failureMessageForTo(^NSString *{
@@ -47,7 +62,7 @@ EXPMatcherImplementationEnd
 
 EXPMatcherImplementationBegin(recordSnapshot, (NSString * snapshot)) {
     match(^BOOL{
-        return [EXPExpect compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:YES];
+        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:YES];
     });
 
     failureMessageForTo(^NSString *{

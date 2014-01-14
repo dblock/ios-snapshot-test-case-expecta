@@ -10,7 +10,4 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '6.0'
   s.requires_arc = true
   s.source_files = 'EXPMatchers+FBSnapshotTest.{h,m}'
-  fb_def = 'FB_REFERENCE_IMAGE_DIR'
-  fb_val = '"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages"'
-  s.prefix_header_contents = "#define #{fb_def} = #{fb_val}"
 end

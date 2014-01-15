@@ -1,20 +1,25 @@
 PODS:
   - Expecta (0.2.3)
+  - EXPMatchers+FBSnapshotTest (1.0)
   - FBSnapshotTestCase (1.0)
   - Specta (0.2.1)
 
 DEPENDENCIES:
   - Expecta (~> 0.2.3)
+  - EXPMatchers+FBSnapshotTest (from `../`)
   - FBSnapshotTestCase (from `https://github.com/dblock/ios-snapshot-test-case`, branch `fb-snapshot-test-recorder`)
   - Specta (~> 0.2.1)
 
 EXTERNAL SOURCES:
+  EXPMatchers+FBSnapshotTest:
+    :path: ../
   FBSnapshotTestCase:
     :branch: fb-snapshot-test-recorder
     :git: https://github.com/dblock/ios-snapshot-test-case
 
 SPEC CHECKSUMS:
   Expecta: dbc4a27fabb853bdd2e907e33f11ee43a9a47d0c
+  EXPMatchers+FBSnapshotTest: 2fb23b0b1bf25ccc619ebda82d5cf87c01efc4aa
   FBSnapshotTestCase: 66081c20db6620d96721165d13b0d608df41dbb8
   Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
 

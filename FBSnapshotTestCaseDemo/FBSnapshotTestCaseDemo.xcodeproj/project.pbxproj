@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		17763C61FFED406582CBC82C /* libPods-FBSnapshotTestCaseDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1071011B75940D187E3F80A /* libPods-FBSnapshotTestCaseDemoTests.a */; };
-		3C86867A1885C88300D82C8A /* EXPMatchers+FBSnapshotTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8686791885C88300D82C8A /* EXPMatchers+FBSnapshotTest.m */; };
 		3C86867C1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C86867B1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m */; };
 		A24E010717F9A42A001252DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010617F9A42A001252DB /* Foundation.framework */; };
 		A24E010917F9A42A001252DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010817F9A42A001252DB /* CoreGraphics.framework */; };
@@ -36,8 +35,6 @@
 
 /* Begin PBXFileReference section */
 		0717FEB34B2B43128D066686 /* Pods-FBSnapshotTestCaseDemoTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.xcconfig"; path = "Pods/Pods-FBSnapshotTestCaseDemoTests.xcconfig"; sourceTree = "<group>"; };
-		3C8686781885C88300D82C8A /* EXPMatchers+FBSnapshotTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+FBSnapshotTest.h"; path = "../EXPMatchers+FBSnapshotTest.h"; sourceTree = "<group>"; };
-		3C8686791885C88300D82C8A /* EXPMatchers+FBSnapshotTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+FBSnapshotTest.m"; path = "../EXPMatchers+FBSnapshotTest.m"; sourceTree = "<group>"; };
 		3C86867B1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseDemoSpecs.m; sourceTree = "<group>"; };
 		A23E9CB517FA9C300071B3CE /* FBSnapshotTestCaseDemo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = FBSnapshotTestCaseDemo.xcconfig; path = ../FBSnapshotTestCaseDemo.xcconfig; sourceTree = "<group>"; };
 		A24E010317F9A42A001252DB /* FBSnapshotTestCaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBSnapshotTestCaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,19 +82,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C8686771885C84900D82C8A /* EXPMatchers */ = {
-			isa = PBXGroup;
-			children = (
-				3C8686781885C88300D82C8A /* EXPMatchers+FBSnapshotTest.h */,
-				3C8686791885C88300D82C8A /* EXPMatchers+FBSnapshotTest.m */,
-			);
-			name = EXPMatchers;
-			sourceTree = "<group>";
-		};
 		A24E00FA17F9A42A001252DB = {
 			isa = PBXGroup;
 			children = (
-				3C8686771885C84900D82C8A /* EXPMatchers */,
 				A24E010C17F9A42A001252DB /* FBSnapshotTestCaseDemo */,
 				A24E012517F9A42A001252DB /* FBSnapshotTestCaseDemoTests */,
 				A24E010517F9A42A001252DB /* Frameworks */,
@@ -312,7 +299,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C86867C1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m in Sources */,
-				3C86867A1885C88300D82C8A /* EXPMatchers+FBSnapshotTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

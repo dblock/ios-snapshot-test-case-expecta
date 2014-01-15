@@ -9,8 +9,11 @@
 #import "Expecta.h"
 
 @interface EXPExpectFBSnapshotTest : NSObject
-    @property (nonatomic,strong) NSString *referenceImagesDirectory;
-    +(id)instance;
+
+@property (nonatomic,strong) NSString *referenceImagesDirectory;
+
++(id)instance;
+
 @end
 
 EXPMatcherInterface(haveValidSnapshot, (NSString * snapshot));

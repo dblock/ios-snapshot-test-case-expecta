@@ -13,8 +13,6 @@
 
 @implementation EXPExpectFBSnapshotTest
 
-@synthesize referenceImagesDirectory;
-
 +(id)instance {
     static EXPExpectFBSnapshotTest *instance = nil;
     static dispatch_once_t onceToken;
@@ -29,8 +27,8 @@
                            testCase:(id)testCase
                              record:(BOOL)record
 {
-    FBTestSnapshotController * snapshotController = [[FBTestSnapshotController alloc] initWithTestClass:[testCase class]];
-    FBSnapshotTestRecorder * recorder = [[FBSnapshotTestRecorder alloc] initWithController:snapshotController];
+    FBTestSnapshotController *snapshotController = [[FBTestSnapshotController alloc] initWithTestClass:[testCase class]];
+    FBSnapshotTestRecorder *recorder = [[FBSnapshotTestRecorder alloc] initWithController:snapshotController];
     recorder.selector = NSSelectorFromString(snapshot);
     recorder.recordMode = record;
     NSString * referenceImageDirectory = [[EXPExpectFBSnapshotTest instance] referenceImagesDirectory];

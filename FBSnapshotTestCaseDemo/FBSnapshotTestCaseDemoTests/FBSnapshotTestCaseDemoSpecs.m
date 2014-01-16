@@ -19,15 +19,34 @@ beforeAll(^{
     [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory:referenceImagesDirectory];
 });
 
-it(@"matches view", ^{
-    FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-    expect(view).to.recordSnapshot(@"FBExampleView");
-    expect(view).to.haveValidSnapshot(@"FBExampleView");
+describe(@"manual matching", ^{
+
+    it(@"matches view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).to.recordSnapshotNamed(@"FBExampleView");
+        expect(view).to.haveValidSnapshotNamed(@"FBExampleView");
+    });
+
+    it(@"doesn't match a view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).toNot.haveValidSnapshotNamed(@"FBExampleViewDoesNotExist");
+    });
+
 });
 
-it(@"doesn't match a view", ^{
-    FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-    expect(view).toNot.haveValidSnapshot(@"FBExampleViewDoesNotExist");
+describe(@"implicit matching", ^{
+
+    it(@"matches view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).to.recordSnapshot();
+        expect(view).to.haveValidSnapshot();
+    });
+
+    it(@"doesn't match a view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).toNot.haveValidSnapshot();
+    });
+
 });
 
 SpecEnd

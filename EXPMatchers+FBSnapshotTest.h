@@ -11,6 +11,7 @@
 @interface EXPExpectFBSnapshotTest : NSObject
 @end
 
+/// Set the default folder for image tests to run in
 extern void setReferenceImageDir(char *reference);
 
 EXPMatcherInterface(haveValidSnapshot, (void));

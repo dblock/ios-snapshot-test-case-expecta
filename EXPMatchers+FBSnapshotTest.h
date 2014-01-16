@@ -10,11 +10,14 @@
 
 @interface EXPExpectFBSnapshotTest : NSObject
 
-@property (nonatomic,strong) NSString *referenceImagesDirectory;
+@property (nonatomic, strong) NSString *referenceImagesDirectory;
 
-+(id)instance;
++ (id)instance;
 
 @end
 
-EXPMatcherInterface(haveValidSnapshot, (NSString * snapshot));
-EXPMatcherInterface(recordSnapshot, (NSString * snapshot));
+EXPMatcherInterface(haveValidSnapshot, (void));
+EXPMatcherInterface(recordSnapshot, (void));
+
+EXPMatcherInterface(haveValidSnapshotNamed, (NSString *snapshot));
+EXPMatcherInterface(recordSnapshotNamed, (NSString *snapshot));

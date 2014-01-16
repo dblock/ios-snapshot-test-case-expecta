@@ -63,7 +63,7 @@ NSString *sanitizedTestPath(){
     NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"];
     NSString *currentTestName = [[compiledExample.name componentsSeparatedByCharactersInSet:[charSet invertedSet]] componentsJoinedByString:@"_"];
 
-    return [NSString stringWithFormat:@"%@_%@", specName, currentTestName];
+    return [NSString stringWithFormat:@"%@/%@", specName, currentTestName];
 }
 
 EXPMatcherImplementationBegin(haveValidSnapshot, (void)){

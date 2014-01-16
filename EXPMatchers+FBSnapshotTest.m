@@ -11,6 +11,10 @@
 #import "FBTestSnapshotController.h"
 #import "FBSnapshotTestRecorder.h"
 
+@interface EXPExpectFBSnapshotTest()
+@property (nonatomic, strong) NSString *referenceImagesDirectory;
+@end
+
 @implementation EXPExpectFBSnapshotTest
 
 + (id)instance
@@ -44,6 +48,11 @@
 }
 
 @end
+
+void setReferenceImageDir(char *reference) {
+    NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%s", reference];
+    [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory:referenceImagesDirectory];
+};
 
 // If you're bringing in Speca via CocoaPods
 // use the test path to get the test's image file URL

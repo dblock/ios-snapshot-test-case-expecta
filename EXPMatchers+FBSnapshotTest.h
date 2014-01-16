@@ -9,12 +9,9 @@
 #import "Expecta.h"
 
 @interface EXPExpectFBSnapshotTest : NSObject
-
-@property (nonatomic, strong) NSString *referenceImagesDirectory;
-
-+ (id)instance;
-
 @end
+
+extern void setReferenceImageDir(char *reference);
 
 EXPMatcherInterface(haveValidSnapshot, (void));
 EXPMatcherInterface(recordSnapshot, (void));

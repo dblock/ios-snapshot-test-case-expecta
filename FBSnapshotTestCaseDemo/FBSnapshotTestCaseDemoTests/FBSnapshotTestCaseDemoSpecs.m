@@ -9,15 +9,12 @@
 #define EXP_SHORTHAND
 #include <Specta/Specta.h>
 #include <Expecta/Expecta.h>
-#include "EXPMatchers+FBSnapshotTest.h"
+#include <EXPMatchers+FBSnapshotTest/EXPMatchers+FBSnapshotTest.h>
 #include "FBExampleView.h"
 
 SpecBegin(FBExampleView)
 
-beforeAll(^{
-    NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR];
-    [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory:referenceImagesDirectory];
-});
+setReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
 
 describe(@"manual matching", ^{
 

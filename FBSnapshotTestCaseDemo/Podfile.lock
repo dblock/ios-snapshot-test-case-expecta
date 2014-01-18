@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: dbc4a27fabb853bdd2e907e33f11ee43a9a47d0c
-  EXPMatchers+FBSnapshotTest: 2fb23b0b1bf25ccc619ebda82d5cf87c01efc4aa
+  EXPMatchers+FBSnapshotTest: 0d7f2e346c8af8d55121be82291af70beae364ca
   FBSnapshotTestCase: 66081c20db6620d96721165d13b0d608df41dbb8
   Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
 

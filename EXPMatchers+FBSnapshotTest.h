@@ -9,12 +9,13 @@
 #import "Expecta.h"
 
 @interface EXPExpectFBSnapshotTest : NSObject
-
-@property (nonatomic,strong) NSString *referenceImagesDirectory;
-
-+(id)instance;
-
 @end
 
-EXPMatcherInterface(haveValidSnapshot, (NSString * snapshot));
-EXPMatcherInterface(recordSnapshot, (NSString * snapshot));
+/// Set the default folder for image tests to run in
+extern void setGlobalReferenceImageDir(char *reference);
+
+EXPMatcherInterface(haveValidSnapshot, (void));
+EXPMatcherInterface(recordSnapshot, (void));
+
+EXPMatcherInterface(haveValidSnapshotNamed, (NSString *snapshot));
+EXPMatcherInterface(recordSnapshotNamed, (NSString *snapshot));

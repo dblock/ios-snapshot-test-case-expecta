@@ -9,25 +9,41 @@
 #define EXP_SHORTHAND
 #include <Specta/Specta.h>
 #include <Expecta/Expecta.h>
-#include "EXPMatchers+FBSnapshotTest.h"
+#include <EXPMatchers+FBSnapshotTest/EXPMatchers+FBSnapshotTest.h>
 #include "FBExampleView.h"
 
 SpecBegin(FBExampleView)
 
-beforeAll(^{
-    NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%s", FB_REFERENCE_IMAGE_DIR];
-    [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory:referenceImagesDirectory];
+setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
+
+describe(@"manual matching", ^{
+
+    it(@"matches view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).to.recordSnapshotNamed(@"FBExampleView");
+        expect(view).to.haveValidSnapshotNamed(@"FBExampleView");
+    });
+
+    it(@"doesn't match a view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).toNot.haveValidSnapshotNamed(@"FBExampleViewDoesNotExist");
+    });
+
 });
 
-it(@"matches view", ^{
-    FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-    expect(view).to.recordSnapshot(@"FBExampleView");
-    expect(view).to.haveValidSnapshot(@"FBExampleView");
-});
+describe(@"test name derived matching", ^{
 
-it(@"doesn't match a view", ^{
-    FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-    expect(view).toNot.haveValidSnapshot(@"FBExampleViewDoesNotExist");
+    it(@"matches view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).to.recordSnapshot();
+        expect(view).to.haveValidSnapshot();
+    });
+
+    it(@"doesn't match a view", ^{
+        FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+        expect(view).toNot.haveValidSnapshot();
+    });
+
 });
 
 SpecEnd

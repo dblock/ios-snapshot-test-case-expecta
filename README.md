@@ -18,12 +18,11 @@ This requires a fork and the `fb-snapshot-test-recorder` branch, until [ios-snap
 
 ### App setup
 
-* Specify the location of reference images with `setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);`
-* This is a global and needs to only be set once, as the test suite is ran alphabetically, you should ensure it's in the the first test suite that loads.
+Specify the location of reference images with `setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);`. This only needs to be called once. You may place it in the first test suite, which are usually executed in alphabetical order.
 
-Use `expect(view).to.recordSnapshot(@"unique snapshot name")` to record a snapshot and `expect(view).to.haveValidSnapshot(@"unique snapshot name")` to check it.
+Use `expect(view).to.recordSnapshotNamed(@"unique snapshot name")` to record a snapshot and `expect(view).to.haveValidSnapshotNamed(@"unique snapshot name")` to check it.
 
-If you've compiled with Specta you have an extra 2 methods that use the spec hierarchy to generate the name for you. You should only do 1 per `it()` block. They are `recordSnapshot()` and `haveValidSnapshot()`.
+If you project was compiled with Specta included, you have two extra methods that use the spec hierarchy to generate the snapshot name for you: `recordSnapshot()` and `haveValidSnapshot()`. You should only call these once per `it()` block.
 
 ``` Objective-C
 #define EXP_SHORTHAND

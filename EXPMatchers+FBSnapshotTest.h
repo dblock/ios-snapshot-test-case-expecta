@@ -12,7 +12,7 @@
 @end
 
 /// Set the default folder for image tests to run in
-extern void setReferenceImageDir(char *reference);
+extern void setGlobalReferenceImageDir(char *reference);
 
 EXPMatcherInterface(haveValidSnapshot, (void));
 EXPMatcherInterface(recordSnapshot, (void));

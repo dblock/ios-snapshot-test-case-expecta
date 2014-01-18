@@ -14,7 +14,7 @@
 
 SpecBegin(FBExampleView)
 
-setReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
+setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
 
 describe(@"manual matching", ^{
 
@@ -31,7 +31,7 @@ describe(@"manual matching", ^{
 
 });
 
-describe(@"implicit matching", ^{
+describe(@"test name derived matching", ^{
 
     it(@"matches view", ^{
         FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];

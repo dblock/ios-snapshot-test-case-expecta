@@ -49,7 +49,7 @@
 
 @end
 
-void setReferenceImageDir(char *reference) {
+void setGlobalReferenceImageDir(char *reference) {
     NSString *referenceImagesDirectory = [NSString stringWithFormat:@"%s", reference];
     [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory:referenceImagesDirectory];
 };

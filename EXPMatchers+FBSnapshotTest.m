@@ -9,7 +9,6 @@
 #import "EXPMatchers+FBSnapshotTest.h"
 #import "EXPMatcherHelpers.h"
 #import "FBTestSnapshotController.h"
-#import "FBSnapshotTestRecorder.h"
 
 @interface EXPExpectFBSnapshotTest()
 @property (nonatomic, strong) NSString *referenceImagesDirectory;
@@ -33,18 +32,16 @@
                              record:(BOOL)record
 {
     FBTestSnapshotController *snapshotController = [[FBTestSnapshotController alloc] initWithTestClass:[testCase class]];
-    FBSnapshotTestRecorder *recorder = [[FBSnapshotTestRecorder alloc] initWithController:snapshotController];
-    recorder.selector = NSSelectorFromString(snapshot);
-    recorder.recordMode = record;
-    NSString * referenceImageDirectory = [[EXPExpectFBSnapshotTest instance] referenceImagesDirectory];
-    if (! referenceImageDirectory) {
-        [NSException raise:@"Missing value for referenceImageDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];
+    snapshotController.recordMode = record;
+    snapshotController.referenceImagesDirectory = [[EXPExpectFBSnapshotTest instance] referenceImagesDirectory];
+    if (! snapshotController.referenceImagesDirectory) {
+        [NSException raise:@"Missing value for referenceImagesDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];
     }
     __block NSError *error = nil;
-    return [recorder compareSnapshotOfViewOrLayer:viewOrLayer
-                         referenceImagesDirectory:referenceImageDirectory
-                                       identifier:nil
-                                            error:& error];
+    return [snapshotController compareSnapshotOfViewOrLayer:viewOrLayer
+                                                   selector:NSSelectorFromString(snapshot)
+                                                 identifier:nil
+                                                      error:& error];
 }
 
 @end

@@ -10,11 +10,11 @@ ios-snapshot-test-case-expecta
 Add `FBSnapshotTestCase` and `EXPMatchers+FBSnapshotTest` to your Podfile.
 
 ``` ruby
-pod 'FBSnapshotTestCase', :git => 'https://github.com/dblock/ios-snapshot-test-case', :branch => 'fb-snapshot-test-recorder'
+pod 'FBSnapshotTestCase', :git => 'https://github.com/dblock/ios-snapshot-test-case', :branch => 'fb-snapshot-test-controller'
 pod 'EXPMatchers+FBSnapshotTest', :git => 'https://github.com/dblock/ios-snapshot-test-case-expecta'
 ```
 
-This requires a fork and the `fb-snapshot-test-recorder` branch, until [ios-snapshot-test-case#8](https://github.com/facebook/ios-snapshot-test-case/pull/8) is merged.
+This requires a fork and the `fb-snapshot-test-recorder` branch, until [ios-snapshot-test-case#13](https://github.com/facebook/ios-snapshot-test-case/pull/13) is merged.
 
 ### App setup
 

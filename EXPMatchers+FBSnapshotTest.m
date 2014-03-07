@@ -8,7 +8,7 @@
 
 #import "EXPMatchers+FBSnapshotTest.h"
 #import "EXPMatcherHelpers.h"
-#import "FBTestSnapshotController.h"
+#import "FBSnapshotTestController.h"
 
 @interface EXPExpectFBSnapshotTest()
 @property (nonatomic, strong) NSString *referenceImagesDirectory;
@@ -31,7 +31,7 @@
                            testCase:(id)testCase
                              record:(BOOL)record
 {
-    FBTestSnapshotController *snapshotController = [[FBTestSnapshotController alloc] initWithTestClass:[testCase class]];
+    FBSnapshotTestController *snapshotController = [[FBSnapshotTestController alloc] initWithTestClass:[testCase class]];
     snapshotController.recordMode = record;
     snapshotController.referenceImagesDirectory = [[EXPExpectFBSnapshotTest instance] referenceImagesDirectory];
     if (! snapshotController.referenceImagesDirectory) {

@@ -1,7 +1,7 @@
 platform :ios, '7.0'
 
 target 'FBSnapshotTestCaseDemoTests', :exclusive => true do
-  pod 'FBSnapshotTestCase', :git => 'https://github.com/facebook/ios-snapshot-test-case'
+  pod 'FBSnapshotTestCase', '~> 1.1'
   pod 'Specta', '~> 0.2.1'
   pod 'EXPMatchers+FBSnapshotTest', :path => "../"
 end

@@ -7,14 +7,12 @@ PODS:
 
 DEPENDENCIES:
   - EXPMatchers+FBSnapshotTest (from `../`)
-  - FBSnapshotTestCase (from `https://github.com/facebook/ios-snapshot-test-case`)
+  - FBSnapshotTestCase (~> 1.1)
   - Specta (~> 0.2.1)
 
 EXTERNAL SOURCES:
   EXPMatchers+FBSnapshotTest:
     :path: ../
-  FBSnapshotTestCase:
-    :git: https://github.com/facebook/ios-snapshot-test-case
 
 SPEC CHECKSUMS:
   Expecta: 5c147dedfea5fbcf773995f7e65020abcc936ce5

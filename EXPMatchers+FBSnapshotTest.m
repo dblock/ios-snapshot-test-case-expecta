@@ -44,6 +44,22 @@
                                                       error:error];
 }
 
++ (NSString *)combinedError:(NSString *)message test:(NSString *)test error:(NSError *)error
+{
+    NSAssert(message, @"missing message");
+    NSAssert(test, @"missing test name");
+
+    NSMutableArray *ary = [NSMutableArray array];
+
+    [ary addObject:[NSString stringWithFormat:@"%@ %@", message, test]];
+
+    for(NSString *key in error.userInfo.keyEnumerator) {
+        [ary addObject:[NSString stringWithFormat:@" %@: %@", key, [error.userInfo valueForKey:key]]];
+    }
+    
+    return [ary componentsJoinedByString:@"\n"];
+}
+
 @end
 
 void setGlobalReferenceImageDir(char *reference) {
@@ -80,13 +96,11 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
     });
 
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected a matching snapshot for test %@\n  path=%@\n  error=%@\n  reason=%@",
-                sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected a matching snapshot in" test:sanitizedTestPath() error:error];
     });
 
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: not to have a matching snapshot for test %@\n  path=%@\n  error=%@\n  reason=%@",
-                sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected not to have a matching snapshot in" test:sanitizedTestPath() error:error];
     });
 }
 EXPMatcherImplementationEnd
@@ -101,19 +115,17 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
 
     failureMessageForTo(^NSString *{
         if (error) {
-            return [NSString stringWithFormat:@"expected to record a snapshot for test %@\n  path=%@\n  error=%@\n  reason=%@",
-                    sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a snapshot in" test:sanitizedTestPath() error:error];
         } else {
-            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", sanitizedTestPath()];
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", sanitizedTestPath()];
         }
     });
 
     failureMessageForNotTo(^NSString *{
         if (error) {
-            return [NSString stringWithFormat:@"expected: to record a matching snapshot test %@\n  path=%@\n  error=%@\n  reason=%@",
-                    sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a snapshot in" test:sanitizedTestPath() error:error];
         } else {
-            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", sanitizedTestPath()];
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", sanitizedTestPath()];
         }
     });
 }
@@ -129,11 +141,11 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
     });
 
     failureMessageForTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
     });
 
     failureMessageForNotTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
     });
 }
 EXPMatcherImplementationEnd
@@ -146,11 +158,11 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
     });
 
     failureMessageForTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
     });
 
     failureMessageForNotTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
     });
 }
 EXPMatcherImplementationEnd
@@ -173,13 +185,11 @@ EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     });
 
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected a matching snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
-                snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected a matching snapshot named" test:snapshot error:error];
     });
 
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: not to have a matching snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
-                snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected not to have a matching snapshot named" test:snapshot error:error];
     });
 }
 EXPMatcherImplementationEnd
@@ -199,19 +209,17 @@ EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
 
     failureMessageForTo(^NSString *{
         if (error) {
-            return [NSString stringWithFormat:@"expected to record a snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
-                    snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a matching snapshot named" test:snapshot error:error];
         } else {
-            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", snapshot];
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", snapshot];
         }
     });
 
     failureMessageForNotTo(^NSString *{
         if (error) {
-            return [NSString stringWithFormat:@"expected: to record a matching snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
-                    snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a matching snapshot named" test:snapshot error:error];
         } else {
-            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", snapshot];
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", snapshot];
         }
     });
 }

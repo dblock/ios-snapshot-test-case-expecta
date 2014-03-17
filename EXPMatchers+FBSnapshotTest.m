@@ -28,7 +28,8 @@
 }
 
 
-+ (BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer snapshot:(NSString *)snapshot testCase:(id)testCase record:(BOOL)record referenceDirectory:(NSString *)referenceDirectory
++ (BOOL)compareSnapshotOfViewOrLayer:(id)viewOrLayer snapshot:(NSString *)snapshot testCase:(id)testCase record:(BOOL)record referenceDirectory:(NSString *)referenceDirectory error:(NSError **)error
+  
 {
     FBSnapshotTestController *snapshotController = [[FBSnapshotTestController alloc] initWithTestClass:[testCase class]];
     snapshotController.recordMode = record;
@@ -37,11 +38,27 @@
     if (! snapshotController.referenceImagesDirectory) {
         [NSException raise:@"Missing value for referenceImagesDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];
     }
-    __block NSError *error = nil;
+
     return [snapshotController compareSnapshotOfViewOrLayer:viewOrLayer
                                                    selector:NSSelectorFromString(snapshot)
                                                  identifier:nil
-                                                      error:& error];
+                                                      error:error];
+}
+
++ (NSString *)combinedError:(NSString *)message test:(NSString *)test error:(NSError *)error
+{
+    NSAssert(message, @"missing message");
+    NSAssert(test, @"missing test name");
+
+    NSMutableArray *ary = [NSMutableArray array];
+
+    [ary addObject:[NSString stringWithFormat:@"%@ %@", message, test]];
+
+    for(NSString *key in error.userInfo.keyEnumerator) {
+        [ary addObject:[NSString stringWithFormat:@" %@: %@", key, [error.userInfo valueForKey:key]]];
+    }
+    
+    return [ary componentsJoinedByString:@"\n"];
 }
 
 @end
@@ -108,34 +125,46 @@ NSString *sanitizedTestPath(){
 }
 
 EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
+    __block NSError *error = nil;
+
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:NO referenceDirectory:referenceImageDir];
+        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:NO referenceDirectory:referenceImageDir error:&error];
     });
     
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected a matching snapshot for test %@", sanitizedTestPath()];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected a matching snapshot in" test:sanitizedTestPath() error:error];
     });
     
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: not to have a matching snapshot for test %@", sanitizedTestPath()];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected not to have a matching snapshot in" test:sanitizedTestPath() error:error];
     });
 }
 EXPMatcherImplementationEnd
 
 EXPMatcherImplementationBegin(recordSnapshot, (void)) {
-    
+    __block NSError *error = nil;
+
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:YES referenceDirectory:referenceImageDir];
+        [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:YES referenceDirectory:referenceImageDir error:&error];
+        return NO;
     });
     
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected to record a snapshot for test %@", sanitizedTestPath()];
+        if (error) {
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a snapshot in" test:sanitizedTestPath() error:error];
+        } else {
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", sanitizedTestPath()];
+        }
     });
     
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: to record a matching snapshot test %@", sanitizedTestPath()];
+        if (error) {
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a snapshot in" test:sanitizedTestPath() error:error];
+        } else {
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", sanitizedTestPath()];
+        }
     });
 }
 EXPMatcherImplementationEnd
@@ -145,33 +174,35 @@ EXPMatcherImplementationEnd
 // If you don't have Speca stub the functions
 
 EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
+  
     prerequisite(^BOOL{
         return NO;
     });
     
     failureMessageForTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
     });
     
     failureMessageForNotTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
     });
 }
 EXPMatcherImplementationEnd
 
 
 EXPMatcherImplementationBegin(recordSnapshot, (void)) {
+    __block NSError *error = nil;
     
     prerequisite(^BOOL{
         return NO;
     });
     
     failureMessageForTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
     });
     
     failureMessageForNotTo(^NSString *{
-        return @"You need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
+        return @"you need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
     });
 }
 EXPMatcherImplementationEnd
@@ -183,6 +214,7 @@ EXPMatcherImplementationEnd
 
 EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     BOOL snapshotIsNil = (snapshot == nil);
+    __block NSError *error = nil;
     
     prerequisite(^BOOL{
         return !(snapshotIsNil);
@@ -190,21 +222,23 @@ EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO referenceDirectory:referenceImageDir];
+        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO referenceDirectory:referenceImageDir error:&error];
     });
     
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected a matching snapshot in %@", snapshot];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected a matching snapshot named" test:snapshot error:error];
+
     });
     
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: not to have a matching snapshot in %@", snapshot];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected not to have a matching snapshot named" test:snapshot error:error];
     });
 }
 EXPMatcherImplementationEnd
 
 EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
     BOOL snapshotIsNil = (snapshot == nil);
+    __block NSError *error = nil;
     
     prerequisite(^BOOL{
         return !(snapshotIsNil);
@@ -212,15 +246,24 @@ EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
     
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:YES referenceDirectory:referenceImageDir];
+        [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:YES referenceDirectory:referenceImageDir error:&error];
+        return NO;
     });
     
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected to record a snapshot in %@", snapshot];
+        if (error) {
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a matching snapshot named" test:snapshot error:error];
+        } else {
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", snapshot];
+        }
     });
     
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: to record a matching snapshot in %@", snapshot];
+        if (error) {
+            return [EXPExpectFBSnapshotTest combinedError:@"expected to record a matching snapshot named" test:snapshot error:error];
+        } else {
+            return [NSString stringWithFormat:@"snapshot %@ successfully recorded, replace recordSnapshot with a check", snapshot];
+        }
     });
 }
 EXPMatcherImplementationEnd

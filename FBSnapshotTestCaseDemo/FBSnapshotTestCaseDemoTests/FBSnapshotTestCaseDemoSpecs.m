@@ -14,13 +14,14 @@
 
 SpecBegin(FBExampleView)
 
-setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
+beforeAll(^{
+    setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
+});
 
 describe(@"manual matching", ^{
 
     it(@"matches view", ^{
         FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-        expect(view).to.recordSnapshotNamed(@"FBExampleView");
         expect(view).to.haveValidSnapshotNamed(@"FBExampleView");
     });
 
@@ -35,7 +36,6 @@ describe(@"test name derived matching", ^{
 
     it(@"matches view", ^{
         FBExampleView *view = [[FBExampleView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-        expect(view).to.recordSnapshot();
         expect(view).to.haveValidSnapshot();
     });
 

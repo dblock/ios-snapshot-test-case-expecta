@@ -30,6 +30,7 @@
                            snapshot:(NSString *)snapshot
                            testCase:(id)testCase
                              record:(BOOL)record
+                               error:(NSError **)error
 {
     FBSnapshotTestController *snapshotController = [[FBSnapshotTestController alloc] initWithTestClass:[testCase class]];
     snapshotController.recordMode = record;
@@ -37,11 +38,10 @@
     if (! snapshotController.referenceImagesDirectory) {
         [NSException raise:@"Missing value for referenceImagesDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];
     }
-    __block NSError *error = nil;
     return [snapshotController compareSnapshotOfViewOrLayer:viewOrLayer
                                                    selector:NSSelectorFromString(snapshot)
                                                  identifier:nil
-                                                      error:& error];
+                                                      error:error];
 }
 
 @end
@@ -73,32 +73,48 @@ NSString *sanitizedTestPath(){
 }
 
 EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
+    __block NSError *error = nil;
+    
     match(^BOOL{
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:NO];
+        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:NO error:&error];
     });
 
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected a matching snapshot for test %@", sanitizedTestPath()];
+        return [NSString stringWithFormat:@"expected a matching snapshot for test %@\n  path=%@\n  error=%@\n  reason=%@",
+                sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
     });
 
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: not to have a matching snapshot for test %@", sanitizedTestPath()];
+        return [NSString stringWithFormat:@"expected: not to have a matching snapshot for test %@\n  path=%@\n  error=%@\n  reason=%@",
+                sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
     });
 }
 EXPMatcherImplementationEnd
 
 EXPMatcherImplementationBegin(recordSnapshot, (void)) {
+    __block NSError *error = nil;
 
     match(^BOOL{
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:YES];
+        [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:YES error:&error];
+        return NO;
     });
 
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected to record a snapshot for test %@", sanitizedTestPath()];
+        if (error) {
+            return [NSString stringWithFormat:@"expected to record a snapshot for test %@\n  path=%@\n  error=%@\n  reason=%@",
+                    sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        } else {
+            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", sanitizedTestPath()];
+        }
     });
 
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: to record a matching snapshot test %@", sanitizedTestPath()];
+        if (error) {
+            return [NSString stringWithFormat:@"expected: to record a matching snapshot test %@\n  path=%@\n  error=%@\n  reason=%@",
+                    sanitizedTestPath(), [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        } else {
+            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", sanitizedTestPath()];
+        }
     });
 }
 EXPMatcherImplementationEnd
@@ -146,42 +162,57 @@ EXPMatcherImplementationEnd
 
 EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     BOOL snapshotIsNil = (snapshot == nil);
+    __block NSError *error = nil;
 
     prerequisite(^BOOL{
         return !(snapshotIsNil);
     });
 
     match(^BOOL{
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO];
+        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO error:&error];
     });
 
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected a matching snapshot in %@", snapshot];
+        return [NSString stringWithFormat:@"expected a matching snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
+                snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
     });
 
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: not to have a matching snapshot in %@", snapshot];
+        return [NSString stringWithFormat:@"expected: not to have a matching snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
+                snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
     });
 }
 EXPMatcherImplementationEnd
 
 EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
     BOOL snapshotIsNil = (snapshot == nil);
+    __block NSError *error = nil;
 
     prerequisite(^BOOL{
         return !(snapshotIsNil);
     });
 
     match(^BOOL{
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:YES];
+        [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:YES error:&error];
+        return NO;
     });
 
     failureMessageForTo(^NSString *{
-        return [NSString stringWithFormat:@"expected to record a snapshot in %@", snapshot];
+        if (error) {
+            return [NSString stringWithFormat:@"expected to record a snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
+                    snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        } else {
+            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", snapshot];
+        }
     });
 
     failureMessageForNotTo(^NSString *{
-        return [NSString stringWithFormat:@"expected: to record a matching snapshot in %@", snapshot];
+        if (error) {
+            return [NSString stringWithFormat:@"expected: to record a matching snapshot for %@\n  path=%@\n  error=%@\n  reason=%@",
+                    snapshot, [error.userInfo valueForKey:FBReferenceImageFilePathKey], error.localizedDescription, error.localizedFailureReason];
+        } else {
+            return [NSString stringWithFormat:@"snapshot successfully recorded for %@, replace recordSnapshot with a check", snapshot];
+        }
     });
 }
 EXPMatcherImplementationEnd

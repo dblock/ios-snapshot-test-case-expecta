@@ -16,8 +16,6 @@ pod 'EXPMatchers+FBSnapshotTest', '~> 1.0'
 
 ### App setup
 
-Specify the location of reference images with `setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);`. This only needs to be called once. You may place it in the first test suite, which are usually executed in alphabetical order.
-
 Use `expect(view).to.recordSnapshotNamed(@"unique snapshot name")` to record a snapshot and `expect(view).to.haveValidSnapshotNamed(@"unique snapshot name")` to check it.
 
 If you project was compiled with Specta included, you have two extra methods that use the spec hierarchy to generate the snapshot name for you: `recordSnapshot()` and `haveValidSnapshot()`. You should only call these once per `it()` block.
@@ -30,8 +28,6 @@ If you project was compiled with Specta included, you have two extra methods tha
 #include "FBExampleView.h"
 
 SpecBegin(FBExampleView)
-
-setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
 
 describe(@"manual matching", ^{
 
@@ -66,11 +62,24 @@ describe(@"test name derived matching", ^{
 SpecEnd
 ```
 
+### Sane defaults
+
+`EXPMatchers+FBSnapshotTest` will automatically figure out the tests folder, and [add a reference image](https://github.com/dblock/ios-snapshot-test-case-expecta/blob/master/EXPMatchers%2BFBSnapshotTest.m#L84-L85) directory, if you'd like to override this, you should include a `beforeAll` block setting the `setGlobalReferenceImageDir` in each file containing tests.
+
+```
+beforeAll(^{
+    setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
+});
+```
+
+
 ### Example
 
 A complete project can be found in [FBSnapshotTestCaseDemo](FBSnapshotTestCaseDemo).
 
 Notably, take a look at [FBSnapshotTestCaseDemoSpecs.m](FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemoTests/FBSnapshotTestCaseDemoSpecs.m) for a complete example, which is an expanded Specta version version of [FBSnapshotTestCaseDemoTests.m](https://github.com/facebook/ios-snapshot-test-case/blob/master/FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemoTests/FBSnapshotTestCaseDemoTests.m).
+
+Finally you can consult the tests for [ARTiledImageView](https://github.com/dblock/ARTiledImageView/tree/master/Demo/DemoTests) or [NAMapKit](https://github.com/neilang/NAMapKit/tree/master/Demo/DemoTests).
 
 ### License
 

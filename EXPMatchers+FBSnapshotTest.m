@@ -116,12 +116,11 @@ NSString *sanitizedTestPath();
 NSString *sanitizedTestPath(){
     SPTXCTestCase *test = [[NSThread currentThread] threadDictionary][SPTCurrentTestCaseKey];
     
-    NSString *specName = NSStringFromClass([test class]);
     SPTExample *compiledExample = [test spt_getCurrentExample];
     NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"];
     NSString *currentTestName = [[compiledExample.name componentsSeparatedByCharactersInSet:[charSet invertedSet]] componentsJoinedByString:@"_"];
     
-    return [NSString stringWithFormat:@"%@/%@", specName, currentTestName];
+    return [NSString stringWithFormat:@"%@", currentTestName];
 }
 
 EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
@@ -129,7 +128,8 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
 
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:NO referenceDirectory:referenceImageDir error:&error];
+        NSString *name = sanitizedTestPath();
+        return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:name testCase:[self testCase] record:NO referenceDirectory:referenceImageDir error:&error];
     });
     
     failureMessageForTo(^NSString *{
@@ -137,7 +137,7 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
     });
     
     failureMessageForNotTo(^NSString *{
-        return [EXPExpectFBSnapshotTest combinedError:@"expected not to have a matching snapshot in" test:sanitizedTestPath() error:error];
+        return [EXPExpectFBSnapshotTest combinedError:@"expected to not have a matching snapshot in" test:sanitizedTestPath() error:error];
     });
 }
 EXPMatcherImplementationEnd

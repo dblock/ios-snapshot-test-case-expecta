@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'EXPMatchers+FBSnapshotTest'
-  s.version      = '1.0'
+  s.version      = '1.1.0'
   s.summary      = 'Expecta matchers for ios-snapshot-test-case.'
   s.description  = "Use ios-snapshot-test-case's FBSnapshotTest with Expecta."
   s.homepage     = 'https://github.com/dblock/ios-snapshot-test-case-expecta'

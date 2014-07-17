@@ -1,24 +1,24 @@
 PODS:
-  - Expecta (0.3.0)
-  - EXPMatchers+FBSnapshotTest (1.1.0):
+  - Expecta (0.3.1)
+  - Expecta+Snapshots (1.2.0):
     - Expecta
     - FBSnapshotTestCase
   - FBSnapshotTestCase (1.1)
   - Specta (0.2.1)
 
 DEPENDENCIES:
-  - EXPMatchers+FBSnapshotTest (from `../`)
+  - Expecta+Snapshots (from `../`)
   - FBSnapshotTestCase (~> 1.1)
   - Specta (~> 0.2.1)
 
 EXTERNAL SOURCES:
-  EXPMatchers+FBSnapshotTest:
+  Expecta+Snapshots:
     :path: ../
 
 SPEC CHECKSUMS:
-  Expecta: 322f1dc42610106a5ba9871b4924cf1635d80833
-  EXPMatchers+FBSnapshotTest: cf5bf37817741d89bd3a3ff80be7ff417692ab7d
-  FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
-  Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
+  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
+  Expecta+Snapshots: 8ef3ef7b07bacba092494c546f6c630d336280d0
+  FBSnapshotTestCase: 9053afee1d66b4c7c313fcb0ae582a5e47bea9d0
+  Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1

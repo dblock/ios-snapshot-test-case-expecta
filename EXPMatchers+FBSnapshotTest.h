@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Artsy Inc. All rights reserved.
 //
 
-#import "Expecta.h"
+#import <Expecta/Expecta.h>
 
 @interface EXPExpectFBSnapshotTest : NSObject
 @end

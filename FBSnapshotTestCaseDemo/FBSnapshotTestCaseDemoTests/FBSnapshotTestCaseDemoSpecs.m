@@ -58,17 +58,47 @@ describe(@"test name derived matching", ^{
 
 
 describe(@"supports view controller matching", ^{
+    __block FBViewController *controller;
 
-    it(@"matches view controller", ^{
-        FBViewController *controller = [[FBViewController alloc] init];
+    before(^{
+        controller = [[FBViewController alloc] init];
         controller.view.frame = frame;
+    });
+
+    it(@"matches view controller named", ^{
 
         XCTAssertThrows( test_expect(controller).to.recordSnapshotNamed(@"view controller"), @"Recording did not fail correctly");
 
         expect(controller.viewWillAppearCalled).to.beTruthy();
         expect(controller.viewDidAppearCalled).to.beTruthy();
     });
-    
+
+
+    it(@"matches view controller unnamed", ^{
+
+        XCTAssertThrows( test_expect(controller).to.recordSnapshot(), @"Recording did not fail correctly");
+
+        expect(controller.viewWillAppearCalled).to.beTruthy();
+        expect(controller.viewDidAppearCalled).to.beTruthy();
+    });
+
+
+    it(@"matches view controller named", ^{
+
+        XCTAssertThrows( test_expect(controller).to.haveValidSnapshotNamed(@"view controller 2"), @"Recording did not fail correctly");
+
+        expect(controller.viewWillAppearCalled).to.beTruthy();
+        expect(controller.viewDidAppearCalled).to.beTruthy();
+    });
+
+    it(@"matches view controller named", ^{
+
+        XCTAssertThrows( test_expect(controller).to.haveValidSnapshot(), @"Recording did not fail correctly");
+
+        expect(controller.viewWillAppearCalled).to.beTruthy();
+        expect(controller.viewDidAppearCalled).to.beTruthy();
+    });
+
 });
 
 

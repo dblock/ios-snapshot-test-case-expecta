@@ -128,6 +128,9 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
         NSString *name = sanitizedTestPath();
         if ([actual isKindOfClass:UIViewController.class]) {
+            [actual beginAppearanceTransition:YES animated:NO];
+            [actual endAppearanceTransition];
+            
             actual = [actual view];
         }
 
@@ -243,6 +246,9 @@ EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
         if ([actual isKindOfClass:UIViewController.class]) {
+            [actual beginAppearanceTransition:YES animated:NO];
+            [actual endAppearanceTransition];
+
             actual = [actual view];
         }
         return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO referenceDirectory:referenceImageDir error:&error];

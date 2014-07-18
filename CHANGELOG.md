@@ -1,9 +1,13 @@
 ### Next
 
+### 1.2.1 (7/18/2014)
+
+* [#16](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/16): Fixes view controller tests not calling viewWill/DidAppear when reading, not writing - [@orta](github.com/orta).
+
 ### 1.2.0 (7/17/2014)
 
-* [#12](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/14): Support View Controllers as inputs, and call the view(Will/Did)Appear etc method - [@orta](github.com/orta).
-* [#12](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/14): Renamed Pod to make it consistent with other Expecta matcher libs ( and deprecated older versions ) - [@orta](github.com/orta).
+* [#14](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/14): Support View Controllers as inputs, and call the view(Will/Did)Appear etc method - [@orta](github.com/orta).
+* [#14](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/14): Renamed Pod to make it consistent with other Expecta matcher libs ( and deprecated older versions ) - [@orta](github.com/orta).
 
 ### 1.1.0 (4/10/2014)
 

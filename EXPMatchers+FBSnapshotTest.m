@@ -112,7 +112,7 @@ void setGlobalReferenceImageDir(char *reference) {
 NSString *sanitizedTestPath();
 
 NSString *sanitizedTestPath(){
-    SPTExample *compiledExample = SPTCurrentSpec;
+    SPTSpec *compiledExample = [[NSThread currentThread] threadDictionary][@"SPTCurrentSpec"];
     NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"];
     NSString *currentTestName = [[compiledExample.name componentsSeparatedByCharactersInSet:[charSet invertedSet]] componentsJoinedByString:@"_"];
 

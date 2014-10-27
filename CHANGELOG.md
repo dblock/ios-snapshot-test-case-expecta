@@ -1,8 +1,7 @@
 ### Next
 
-### 1.2.2 (10/23/2014)
 * [#18](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/18):
-  Adapting to new expecta syntax - [@martincik](github.com/martincik)
+  Adapting to new specta syntax - [@martincik](github.com/martincik)
 
 ### 1.2.1 (7/18/2014)
 

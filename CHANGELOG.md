@@ -1,5 +1,8 @@
 ### Next
 
+* [#18](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/18):
+  Adapting to new specta syntax - [@martincik](github.com/martincik)
+
 ### 1.2.1 (7/18/2014)
 
 * [#16](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/16): Fixes view controller tests not calling viewWill/DidAppear when reading, not writing - [@orta](github.com/orta).

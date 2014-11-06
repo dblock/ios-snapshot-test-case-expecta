@@ -1,7 +1,7 @@
 platform :ios, '7.0'
 
 target 'FBSnapshotTestCaseDemoTests', :exclusive => true do
-  pod 'FBSnapshotTestCase', '~> 1.1'
+  pod 'FBSnapshotTestCase', :git => 'https://github.com/facebook/ios-snapshot-test-case', :commit => 'd63e2f81c36af47f4ba8f173df5d2191a22f4581'
   pod 'Specta', :git => 'https://github.com/specta/specta.git', :tag => 'v0.3.0.beta1'
   pod 'Expecta+Snapshots', :path => "../"
 end

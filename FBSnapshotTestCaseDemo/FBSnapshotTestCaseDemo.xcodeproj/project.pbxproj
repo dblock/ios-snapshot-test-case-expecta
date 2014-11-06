@@ -37,7 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0717FEB34B2B43128D066686 /* Pods-FBSnapshotTestCaseDemoTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.xcconfig"; path = "Pods/Pods-FBSnapshotTestCaseDemoTests.xcconfig"; sourceTree = "<group>"; };
 		3C86867B1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseDemoSpecs.m; sourceTree = "<group>"; };
 		60F986231977BFF200C01B03 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		60F986241977BFF200C01B03 /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
@@ -45,6 +44,8 @@
 		60F986271977C39900C01B03 /* EXPExpect+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPExpect+Test.m"; sourceTree = "<group>"; };
 		60F986281977C39900C01B03 /* FakeTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeTestCase.h; sourceTree = "<group>"; };
 		60F986291977C39900C01B03 /* FakeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeTestCase.m; sourceTree = "<group>"; };
+		908CDE506E3383E723261411 /* Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9AD981471586D85BA6D40F9F /* Pods-FBSnapshotTestCaseDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		A23E9CB517FA9C300071B3CE /* FBSnapshotTestCaseDemo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = FBSnapshotTestCaseDemo.xcconfig; path = ../FBSnapshotTestCaseDemo.xcconfig; sourceTree = "<group>"; };
 		A24E010317F9A42A001252DB /* FBSnapshotTestCaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBSnapshotTestCaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24E010617F9A42A001252DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57A74F5CB930500712A50182 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				908CDE506E3383E723261411 /* Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig */,
+				9AD981471586D85BA6D40F9F /* Pods-FBSnapshotTestCaseDemoTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A24E00FA17F9A42A001252DB = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +108,7 @@
 				A24E012517F9A42A001252DB /* FBSnapshotTestCaseDemoTests */,
 				A24E010517F9A42A001252DB /* Frameworks */,
 				A24E010417F9A42A001252DB /* Products */,
-				0717FEB34B2B43128D066686 /* Pods-FBSnapshotTestCaseDemoTests.xcconfig */,
+				57A74F5CB930500712A50182 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -278,7 +288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-FBSnapshotTestCaseDemoTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		43A54D98D96C42CA9EA20BC7 /* Check Pods Manifest.lock */ = {
@@ -450,7 +460,7 @@
 		};
 		A24E013317F9A42A001252DB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0717FEB34B2B43128D066686 /* Pods-FBSnapshotTestCaseDemoTests.xcconfig */;
+			baseConfigurationReference = 908CDE506E3383E723261411 /* Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FBSnapshotTestCaseDemo.app/FBSnapshotTestCaseDemo";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -473,7 +483,7 @@
 		};
 		A24E013417F9A42A001252DB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0717FEB34B2B43128D066686 /* Pods-FBSnapshotTestCaseDemoTests.xcconfig */;
+			baseConfigurationReference = 9AD981471586D85BA6D40F9F /* Pods-FBSnapshotTestCaseDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FBSnapshotTestCaseDemo.app/FBSnapshotTestCaseDemo";
 				FRAMEWORK_SEARCH_PATHS = (

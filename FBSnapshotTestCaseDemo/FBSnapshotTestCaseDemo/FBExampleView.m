@@ -14,8 +14,27 @@
 
 - (void)drawRect:(CGRect)rect
 {
-  [[UIColor redColor] setFill];
+  [[self color] setFill];
   CGContextFillRect(UIGraphicsGetCurrentContext(), [self bounds]);
 }
 
+- (UIColor *)color
+{
+    return [UIColor clearColor];
+}
+
+@end
+
+@implementation FBRedView
+- (UIColor *)color
+{
+    return [UIColor redColor];
+}
+@end
+
+@implementation FBBlueView
+- (UIColor *)color
+{
+    return [UIColor blueColor];
+}
 @end

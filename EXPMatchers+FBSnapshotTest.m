@@ -30,6 +30,7 @@
 
 {
     FBSnapshotTestController *snapshotController = [[FBSnapshotTestController alloc] initWithTestClass:[testCase class]];
+    snapshotController.renderAsLayer = YES;
     snapshotController.recordMode = record;
     snapshotController.referenceImagesDirectory = referenceDirectory;
 
@@ -113,10 +114,8 @@ NSString *sanitizedTestPath();
 
 NSString *sanitizedTestPath(){
     SPTSpec *compiledExample = [[NSThread currentThread] threadDictionary][@"SPTCurrentSpec"];
-    NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"];
-    NSString *currentTestName = [[compiledExample.name componentsSeparatedByCharactersInSet:[charSet invertedSet]] componentsJoinedByString:@"_"];
-
-    return [NSString stringWithFormat:@"%@", currentTestName];
+    NSString *name = [[[[compiledExample.name componentsSeparatedByString:@" test_"] lastObject] stringByReplacingOccurrencesOfString:@"__" withString:@"_"] stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    return name;
 }
 
 EXPMatcherImplementationBegin(haveValidSnapshot, (void)){

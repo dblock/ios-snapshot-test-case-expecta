@@ -7,7 +7,8 @@
 - (void)recordFailureWithDescription:(NSString *)description
                               inFile:(NSString *)filename
                               atLine:(NSUInteger)lineNumber
-                            expected:(BOOL)expected {
+                            expected:(BOOL)expected
+{
     [NSException raise:description format:nil];
 }
 

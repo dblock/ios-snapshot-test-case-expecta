@@ -7,17 +7,13 @@
 //
 
 #import "FBViewController.h"
+#import "FBExampleView.h"
 
 @interface FBViewController ()
 
 @end
 
 @implementation FBViewController
-
-- (void)viewDidLoad
-{
-    self.view.backgroundColor = [UIColor blueColor];
-}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -29,6 +25,24 @@
 {
     [super viewWillAppear:animated];
     self.viewWillAppearCalled = YES;
+}
+
+@end
+
+@implementation FBBlueViewController
+
+- (void)loadView
+{
+    self.view = [[FBBlueView alloc] init];
+}
+
+@end
+
+@implementation FBRedViewController
+
+- (void)loadView
+{
+    self.view = [[FBRedView alloc] init];
 }
 
 @end

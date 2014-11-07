@@ -11,5 +11,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FBExampleView : UIView
+@end
 
+@interface FBRedView : FBExampleView
+@end
+
+@interface FBBlueView : FBExampleView
 @end

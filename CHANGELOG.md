@@ -1,4 +1,8 @@
-### Next
+### 1.3.0
+
+* [#18](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/18):
+  Adapting to new specta syntax - [@martincik](github.com/martincik)
+  Compatibility with Xcode 6 & Xcode 6-compatible versions of dependencies - [@1aurabrown](github.com/1aurabrown)
 
 ### 1.2.1 (7/18/2014)
 

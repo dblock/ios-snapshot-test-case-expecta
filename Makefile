@@ -13,7 +13,6 @@ clean:
 	xctool -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration $(CONFIGURATION) clean
 
 test:
-	open -a iPhone\ Simulator
 	xctool -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration $(CONFIGURATION) test -sdk iphonesimulator
 
 ci: pods clean test

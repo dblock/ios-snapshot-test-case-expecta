@@ -12,3 +12,9 @@
 @property (nonatomic, assign) BOOL viewWillAppearCalled;
 
 @end
+
+@interface FBRedViewController : FBViewController
+@end
+
+@interface FBBlueViewController : FBViewController
+@end

@@ -13,7 +13,6 @@
 
 #include "FBExampleView.h"
 #import "FBViewController.h"
-#import "EXPExpect+Test.h"
 
 #define test_expect(a) [expect(a) test]
 #define assertPass(expr) \

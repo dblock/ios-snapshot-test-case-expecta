@@ -10,8 +10,6 @@
 		17763C61FFED406582CBC82C /* libPods-FBSnapshotTestCaseDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1071011B75940D187E3F80A /* libPods-FBSnapshotTestCaseDemoTests.a */; };
 		3C86867C1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C86867B1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m */; };
 		60F986251977BFF200C01B03 /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F986241977BFF200C01B03 /* FBViewController.m */; };
-		60F9862A1977C39900C01B03 /* EXPExpect+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F986271977C39900C01B03 /* EXPExpect+Test.m */; };
-		60F9862B1977C39900C01B03 /* FakeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F986291977C39900C01B03 /* FakeTestCase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A24E010717F9A42A001252DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010617F9A42A001252DB /* Foundation.framework */; };
 		A24E010917F9A42A001252DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010817F9A42A001252DB /* CoreGraphics.framework */; };
 		A24E010B17F9A42A001252DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010A17F9A42A001252DB /* UIKit.framework */; };
@@ -40,10 +38,6 @@
 		3C86867B1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseDemoSpecs.m; sourceTree = "<group>"; };
 		60F986231977BFF200C01B03 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		60F986241977BFF200C01B03 /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
-		60F986261977C39900C01B03 /* EXPExpect+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPExpect+Test.h"; sourceTree = "<group>"; };
-		60F986271977C39900C01B03 /* EXPExpect+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPExpect+Test.m"; sourceTree = "<group>"; };
-		60F986281977C39900C01B03 /* FakeTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeTestCase.h; sourceTree = "<group>"; };
-		60F986291977C39900C01B03 /* FakeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeTestCase.m; sourceTree = "<group>"; };
 		908CDE506E3383E723261411 /* Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9AD981471586D85BA6D40F9F /* Pods-FBSnapshotTestCaseDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FBSnapshotTestCaseDemoTests/Pods-FBSnapshotTestCaseDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		A23E9CB517FA9C300071B3CE /* FBSnapshotTestCaseDemo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = FBSnapshotTestCaseDemo.xcconfig; path = ../FBSnapshotTestCaseDemo.xcconfig; sourceTree = "<group>"; };
@@ -171,10 +165,6 @@
 		A24E012617F9A42A001252DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				60F986261977C39900C01B03 /* EXPExpect+Test.h */,
-				60F986271977C39900C01B03 /* EXPExpect+Test.m */,
-				60F986281977C39900C01B03 /* FakeTestCase.h */,
-				60F986291977C39900C01B03 /* FakeTestCase.m */,
 				A23E9CB517FA9C300071B3CE /* FBSnapshotTestCaseDemo.xcconfig */,
 				A24E012717F9A42A001252DB /* FBSnapshotTestCaseDemoTests-Info.plist */,
 				A24E012817F9A42A001252DB /* InfoPlist.strings */,
@@ -324,8 +314,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60F9862B1977C39900C01B03 /* FakeTestCase.m in Sources */,
-				60F9862A1977C39900C01B03 /* EXPExpect+Test.m in Sources */,
 				3C86867C1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

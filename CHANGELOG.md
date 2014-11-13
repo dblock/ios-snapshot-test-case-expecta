@@ -1,6 +1,6 @@
 ### 1.3.0 (TBD)
 
-* [#18](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/18): Fixed compatibility with Xcode 6 & Xcode 6-compatible versions of dependencies - [@1aurabrown](github.com/1aurabrown), [@martincik](github.com/martincik).
+* [#18](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/18): Fixed compatibility with Xcode 6 & Xcode 6-compatible versions of dependencies, including Specta 0.2 and 0.3 - [@1aurabrown](github.com/1aurabrown), [@martincik](github.com/martincik), [@andreamazz](https://github.com/andreamazz).
 
 ### 1.2.1 (7/18/2014)
 

@@ -1,5 +1,7 @@
 .DS_Store
+FBSnapshotTestCaseDemo/Podfile.lock
 FBSnapshotTestCaseDemo/Pods
 FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo.xcworkspace
 FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo.xcodeproj/project.xcworkspace/*
 FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo.xcodeproj/xcuserdata/*
+Gemfile.lock

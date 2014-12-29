@@ -18,6 +18,6 @@ test:
 ci: pods clean test
 
 pods:
-	gem install cocoapods --no-document
+	bundle install
 	rm -rf FBSnapshotTestCaseDemo/Pods
 	cd FBSnapshotTestCaseDemo ; LC_ALL=en_US.UTF-8 pod install

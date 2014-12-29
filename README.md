@@ -1,5 +1,5 @@
 Expecta Matchers for FBSnapshotTestCase
-==============================
+=======================================
 
 [Expecta](https://github.com/specta/expecta) matchers for [ios-snapshot-test-case](https://github.com/facebook/ios-snapshot-test-case).
 
@@ -7,10 +7,10 @@ Expecta Matchers for FBSnapshotTestCase
 
 ### Usage
 
-Add `EXPMatchers+FBSnapshotTest` to your Podfile, the latest `FBSnapshotTestCase` will come in as a dependency.
+Add `Expecta+Snapshots` to your Podfile, the latest `FBSnapshotTestCase` will come in as a dependency.
 
 ``` ruby
-pod 'Expecta+Snapshots', '~> 1.0'
+pod 'Expecta+Snapshots'
 ```
 
 ### App setup

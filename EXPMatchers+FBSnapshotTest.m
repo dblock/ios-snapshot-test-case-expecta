@@ -219,8 +219,7 @@ EXPMatcherImplementationEnd
 
 
 EXPMatcherImplementationBegin(recordSnapshot, (void)) {
-    __block NSError *error = nil;
-
+    
     prerequisite(^BOOL{
         return NO;
     });

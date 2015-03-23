@@ -30,7 +30,6 @@
 
 {
     FBSnapshotTestController *snapshotController = [[FBSnapshotTestController alloc] initWithTestClass:[testCase class]];
-    snapshotController.renderAsLayer = YES;
     snapshotController.recordMode = record;
     snapshotController.referenceImagesDirectory = referenceDirectory;
 

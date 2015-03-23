@@ -2,6 +2,10 @@
 
 * Your contribution here.
 
+### 1.3.2 (03/23/2015)
+
+*  [#26](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/26): Added support for latest FBSnapshots - [@itsthejb](https://github.com/itsthejb)
+
 ### 1.3.1 (12/29/2014)
 
 * [#18](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/18): Fixed compatibility with Xcode 6 & Xcode 6-compatible versions of dependencies, including Specta 0.2 and 0.3 - [@1aurabrown](github.com/1aurabrown), [@martincik](github.com/martincik), [@andreamazz](https://github.com/andreamazz).

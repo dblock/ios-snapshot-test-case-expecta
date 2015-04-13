@@ -1,6 +1,6 @@
-### 1.3.2 (Next)
+### 1.3.3 (Next)
 
-* Your contribution here.
+* Don't run view will/did appear if they've already been ran in a test before getting to the view controller - orta
 
 ### 1.3.2 (03/23/2015)
 

@@ -10,6 +10,17 @@
 #import <Expecta/EXPMatcherHelpers.h>
 #import <FBSnapshotTestCase/FBSnapshotTestController.h>
 
+// Gives us the chance to do some more interesting hooks
+
+id viewForActual(id actual) {
+    if ([actual isKindOfClass:UIViewController.class]) {
+        [actual beginAppearanceTransition:YES animated:NO];
+        [actual endAppearanceTransition];
+        actual = [actual view];
+    }
+    return actual;
+}
+
 @interface EXPExpectFBSnapshotTest()
 @property (nonatomic, strong) NSString *referenceImagesDirectory;
 @end
@@ -131,12 +142,7 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
         NSString *name = sanitizedTestPath();
-        if ([actual isKindOfClass:UIViewController.class]) {
-            [actual beginAppearanceTransition:YES animated:NO];
-            [actual endAppearanceTransition];
-            
-            actual = [actual view];
-        }
+        actual = viewForActual(actual);
 
         return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:name testCase:[self testCase] record:NO referenceDirectory:referenceImageDir error:&error];
     });
@@ -162,14 +168,7 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
 
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-
-        // For view controllers do the viewWill/viewDid dance, then pass view through
-        if ([actual isKindOfClass:UIViewController.class]) {
-
-            [actual beginAppearanceTransition:YES animated:NO];
-            [actual endAppearanceTransition];
-            actual = [actual view];
-        }
+        actual = viewForActual(actual);
 
         [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:sanitizedTestPath() testCase:[self testCase] record:YES referenceDirectory:referenceImageDir error:&error];
         return NO;
@@ -248,12 +247,8 @@ EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
 
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-        if ([actual isKindOfClass:UIViewController.class]) {
-            [actual beginAppearanceTransition:YES animated:NO];
-            [actual endAppearanceTransition];
+        actual = viewForActual(actual);
 
-            actual = [actual view];
-        }
         return [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:NO referenceDirectory:referenceImageDir error:&error];
     });
 
@@ -280,13 +275,7 @@ EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
 
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-
-        // For view controllers do the viewWill/viewDid dance, then pass view through
-        if ([actual isKindOfClass:UIViewController.class]) {
-            [actual beginAppearanceTransition:YES animated:NO];
-            [actual endAppearanceTransition];
-            actual = [actual view];
-        }
+        actual = viewForActual(actual);
 
         [EXPExpectFBSnapshotTest compareSnapshotOfViewOrLayer:actual snapshot:snapshot testCase:[self testCase] record:YES referenceDirectory:referenceImageDir error:&error];
         return NO;

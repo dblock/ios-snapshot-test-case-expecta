@@ -19,12 +19,14 @@
 {
     [super viewDidAppear:animated];
     self.viewDidAppearCalled = YES;
+    self.viewDidAppearCalledCount++;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.viewWillAppearCalled = YES;
+    self.viewWillAppearCalledCount++;
 }
 
 @end

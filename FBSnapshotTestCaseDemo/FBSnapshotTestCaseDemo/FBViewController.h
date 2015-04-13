@@ -11,6 +11,8 @@
 @property (nonatomic, assign) BOOL viewDidAppearCalled;
 @property (nonatomic, assign) BOOL viewWillAppearCalled;
 
+@property (nonatomic, assign) NSInteger viewDidAppearCalledCount;
+@property (nonatomic, assign) NSInteger viewWillAppearCalledCount;
 @end
 
 @interface FBRedViewController : FBViewController

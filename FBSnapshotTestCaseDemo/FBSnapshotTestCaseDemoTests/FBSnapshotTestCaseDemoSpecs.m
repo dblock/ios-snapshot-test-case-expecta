@@ -152,6 +152,17 @@ describe(@"snapshots", ^{
                     expect(newVC.viewWillAppearCalled).to.beTruthy();
                     expect(newVC.viewDidAppearCalled).to.beTruthy();
                 });
+
+                it(@"doesnt call the transition methods twice", ^{
+                    FBViewController *newVC = [[FBRedViewController alloc] init];
+                    [newVC beginAppearanceTransition:YES animated:NO];
+                    [newVC endAppearanceTransition];
+
+                    expect(newVC).toNot.haveValidSnapshotNamed(@"named");
+                    expect(newVC.viewDidAppearCalledCount).to.equal(1);
+                    expect(newVC.viewWillAppearCalledCount).to.equal(1);
+                });
+
             });
 
             describe(@"unnamed", ^{
@@ -165,10 +176,18 @@ describe(@"snapshots", ^{
                     expect(newVC.viewDidAppearCalled).to.beTruthy();
                 });
 
+                it(@"doesnt call the transition methods twice", ^{
+                    FBViewController *newVC = [[FBRedViewController alloc] init];
+                    [newVC beginAppearanceTransition:YES animated:NO];
+                    [newVC endAppearanceTransition];
+
+                    expect(newVC).toNot.haveValidSnapshot();
+                    expect(newVC.viewDidAppearCalledCount).to.equal(1);
+                    expect(newVC.viewWillAppearCalledCount).to.equal(1);
+                });
+
                 it(@"doesn't match if file doesn't exist", ^{
                     expect(controller).toNot.haveValidSnapshot();
-                    expect(controller.viewWillAppearCalled).to.beTruthy();
-                    expect(controller.viewDidAppearCalled).to.beTruthy();
                 });
 
                 it(@"doesn't match if files differ", ^{

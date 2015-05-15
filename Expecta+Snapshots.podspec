@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.source_files = 'EXPMatchers+FBSnapshotTest.{h,m}'
   s.frameworks   = 'Foundation', 'XCTest'
   s.dependency     'FBSnapshotTestCase', '1.6'
-  s.dependency     'Expecta', '~> 0.3'
+  s.dependency     'Expecta', '~> 1.0'
 end

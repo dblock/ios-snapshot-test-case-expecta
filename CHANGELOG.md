@@ -1,6 +1,10 @@
-### 1.3.2 (Next)
+### 1.3.4 (Next)
 
 * Your contribution here.
+
+### 1.3.3 (05/11/2015)
+
+*  [#29](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/29): use #if_header  [@ruslanskorb](https://github.com/ruslanskorb)
 
 ### 1.3.2 (03/23/2015)
 

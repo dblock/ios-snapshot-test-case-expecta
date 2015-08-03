@@ -1,6 +1,10 @@
-### 1.x (Next)
+### 2.x (Next)
 
 * Your contribution here.
+
+### 2.0.0 (08/03/2015)
+
+* [#32](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/32): Bump FBSnapshotTestCase to 2.0.3
 
 ### 1.3.4 (05/16/2015)
 

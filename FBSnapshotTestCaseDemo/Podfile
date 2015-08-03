@@ -4,7 +4,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 
 target 'FBSnapshotTestCaseDemoTests', :exclusive => true do
-  pod 'FBSnapshotTestCase'
   pod 'Specta'
   pod 'Expecta+Snapshots', :path => "../"
 end

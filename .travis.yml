@@ -1,9 +1,10 @@
 language: objective-c
-
+rvm: 2
 before_script:
-  - brew update
-  - brew uninstall xctool
-  - brew install xctool
+  - export LANG=en_US.UTF-8
+  - bundle install
+  - cd FBSnapshotTestCaseDemo
+  - bundle exec pod install
 
 script:
-  - make ci
+  - xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'name=iPhone 6' build test | xcpretty -c && exit ${PIPESTATUS[0]}

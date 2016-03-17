@@ -117,6 +117,11 @@ NSString *sanitizedTestPath(){
 EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
     __block NSError *error = nil;
 
+    prerequisite(^BOOL{
+        return actual;
+    });
+
+
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
         NSString *name = sanitizedTestPath();
@@ -131,6 +136,10 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
     });
 
     failureMessageForTo(^NSString *{
+        if (!actual) {
+            return [EXPExpectFBSnapshotTest combinedError:@"Nil was passed into haveValidSnapshot." test:sanitizedTestPath() error:nil];
+        }
+
         return [EXPExpectFBSnapshotTest combinedError:@"expected a matching snapshot in" test:sanitizedTestPath() error:error];
     });
 
@@ -146,7 +155,7 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
     BOOL actualIsViewLayerOrViewController = ([actual isKindOfClass:UIView.class] || [actual isKindOfClass:CALayer.class] || [actual isKindOfClass:UIViewController.class]);
 
     prerequisite(^BOOL{
-        return actualIsViewLayerOrViewController;
+        return actual && actualIsViewLayerOrViewController;
     });
 
     match(^BOOL{
@@ -165,6 +174,10 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
     });
 
     failureMessageForTo(^NSString *{
+        if (!actual) {
+            return [EXPExpectFBSnapshotTest combinedError:@"Nil was passed into recordSnapshot." test:sanitizedTestPath() error:nil];
+        }
+
         if (!actualIsViewLayerOrViewController) {
             return [EXPExpectFBSnapshotTest combinedError:@"Expected a View, Layer or View Controller." test:sanitizedTestPath() error:nil];
         }
@@ -190,7 +203,7 @@ EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     __block NSError *error = nil;
 
     prerequisite(^BOOL{
-        return !(snapshotIsNil);
+        return actual && !(snapshotIsNil);
     });
 
     match(^BOOL{
@@ -205,6 +218,10 @@ EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     });
 
     failureMessageForTo(^NSString *{
+        if (!actual) {
+            return [EXPExpectFBSnapshotTest combinedError:@"Nil was passed into haveValidSnapshotNamed." test:sanitizedTestPath() error:nil];
+        }
+
         return [EXPExpectFBSnapshotTest combinedError:@"expected a matching snapshot named" test:snapshot error:error];
 
     });
@@ -240,6 +257,9 @@ EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
     });
 
     failureMessageForTo(^NSString *{
+        if (!actual) {
+            return [EXPExpectFBSnapshotTest combinedError:@"Nil was passed into recordSnapshotNamed." test:sanitizedTestPath() error:nil];
+        }
         if (!actualIsViewLayerOrViewController) {
             return [EXPExpectFBSnapshotTest combinedError:@"Expected a View, Layer or View Controller." test:snapshot error:nil];
         }

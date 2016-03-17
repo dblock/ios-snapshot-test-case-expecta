@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3C86867C1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C86867B1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m */; };
+		60F67DEF1C9B52F100CEC69F /* EXPExpect+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F67DEA1C9B52BD00CEC69F /* EXPExpect+Test.m */; };
+		60F67DF01C9B52F400CEC69F /* FakeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F67DEC1C9B52BD00CEC69F /* FakeTestCase.m */; };
 		60F986251977BFF200C01B03 /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F986241977BFF200C01B03 /* FBViewController.m */; };
 		A24E010717F9A42A001252DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010617F9A42A001252DB /* Foundation.framework */; };
 		A24E010917F9A42A001252DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24E010817F9A42A001252DB /* CoreGraphics.framework */; };
@@ -38,6 +40,10 @@
 		3C86867B1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCaseDemoSpecs.m; sourceTree = "<group>"; };
 		56F3C0717F7D4F04443FBB5F /* libPods-FBSnapshotTestCaseDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FBSnapshotTestCaseDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60F67DE81C9B482600CEC69F /* Expecta+Snapshots.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; name = "Expecta+Snapshots.podspec"; path = "../../Expecta+Snapshots.podspec"; sourceTree = "<group>"; };
+		60F67DE91C9B52BD00CEC69F /* EXPExpect+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPExpect+Test.h"; sourceTree = "<group>"; };
+		60F67DEA1C9B52BD00CEC69F /* EXPExpect+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPExpect+Test.m"; sourceTree = "<group>"; };
+		60F67DEB1C9B52BD00CEC69F /* FakeTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeTestCase.h; sourceTree = "<group>"; };
+		60F67DEC1C9B52BD00CEC69F /* FakeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeTestCase.m; sourceTree = "<group>"; };
 		60F986231977BFF200C01B03 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		60F986241977BFF200C01B03 /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
 		A23E9CB517FA9C300071B3CE /* FBSnapshotTestCaseDemo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = FBSnapshotTestCaseDemo.xcconfig; path = ../FBSnapshotTestCaseDemo.xcconfig; sourceTree = "<group>"; };
@@ -140,6 +146,10 @@
 				A257F0C817FA982800AB1B02 /* FBExampleView.m */,
 				60F986231977BFF200C01B03 /* FBViewController.h */,
 				60F986241977BFF200C01B03 /* FBViewController.m */,
+				60F67DE91C9B52BD00CEC69F /* EXPExpect+Test.h */,
+				60F67DEA1C9B52BD00CEC69F /* EXPExpect+Test.m */,
+				60F67DEB1C9B52BD00CEC69F /* FakeTestCase.h */,
+				60F67DEC1C9B52BD00CEC69F /* FakeTestCase.m */,
 			);
 			path = FBSnapshotTestCaseDemo;
 			sourceTree = "<group>";
@@ -332,6 +342,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60F67DF01C9B52F400CEC69F /* FakeTestCase.m in Sources */,
+				60F67DEF1C9B52F100CEC69F /* EXPExpect+Test.m in Sources */,
 				3C86867C1885C92500D82C8A /* FBSnapshotTestCaseDemoSpecs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

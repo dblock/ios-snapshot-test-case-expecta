@@ -3,6 +3,7 @@
 
 * [#35](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/35): Make FBSnapshotTestCase more open ended with `~> 2.0`
 * [#35](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/35): Make Expecta+Snapshots work with CocoaPods 1.0, by enforcing the Specta dependency
+* [#35](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/35): Fail quickly if you pass a nil in to record/hasSnapshot
 
 ### 2.0.0 (08/03/2015)
 

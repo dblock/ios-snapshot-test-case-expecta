@@ -1,11 +1,3 @@
-//
-//  EXPMatchers+FBSnapshotTest.h
-//  Artsy
-//
-//  Created by Daniel Doubrovkine on 1/14/14.
-//  Copyright (c) 2014 Artsy Inc. All rights reserved.
-//
-
 #import "EXPMatchers+FBSnapshotTest.h"
 #import <Expecta/EXPMatcherHelpers.h>
 #import <FBSnapshotTestCase/FBSnapshotTestController.h>
@@ -102,11 +94,6 @@ void setGlobalReferenceImageDir(char *reference) {
 @end
 
 
-
-// If you're bringing in Speca via CocoaPods
-// use the test path to get the test's image file URL
-
-#if __has_include(<Specta/Specta.h>)
 #import <Specta/Specta.h>
 #import <Specta/SpectaUtility.h>
 #import <Specta/SPTExample.h>
@@ -197,48 +184,6 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
     });
 }
 EXPMatcherImplementationEnd
-
-#else
-
-// If you don't have Speca stub the functions
-
-EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
-
-    prerequisite(^BOOL{
-        return NO;
-    });
-
-    failureMessageForTo(^NSString *{
-        return @"you need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
-    });
-
-    failureMessageForNotTo(^NSString *{
-        return @"you need Specta installed via CocoaPods to use haveValidSnapshot, use haveValidSnapshotNamed instead";
-    });
-}
-EXPMatcherImplementationEnd
-
-
-EXPMatcherImplementationBegin(recordSnapshot, (void)) {
-    
-    prerequisite(^BOOL{
-        return NO;
-    });
-
-    failureMessageForTo(^NSString *{
-        return @"you need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
-    });
-
-    failureMessageForNotTo(^NSString *{
-        return @"you need Specta installed via CocoaPods to use recordSnapshot, use recordSnapshotNamed instead";
-    });
-}
-EXPMatcherImplementationEnd
-
-
-#endif
-
-
 
 EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     BOOL snapshotIsNil = (snapshot == nil);

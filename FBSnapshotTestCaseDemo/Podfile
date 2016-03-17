@@ -1,9 +1,9 @@
 source 'https://github.com/artsy/Specs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '7.0'
+platform :ios, '8.0'
 
-target 'FBSnapshotTestCaseDemoTests', :exclusive => true do
+target 'FBSnapshotTestCaseDemoTests' do
   pod 'Specta'
   pod 'Expecta+Snapshots', :path => "../"
 end

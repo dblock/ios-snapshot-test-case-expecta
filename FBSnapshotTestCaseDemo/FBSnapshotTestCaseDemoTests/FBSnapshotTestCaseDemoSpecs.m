@@ -18,6 +18,7 @@
 #define assertPass(expr) \
 XCTAssertNoThrow((expr))
 
+#import "EXPExpect+Test.h"
 
 SpecBegin(FBExampleView)
 
@@ -184,6 +185,11 @@ describe(@"snapshots", ^{
 
         });
 
+        it(@"Raises when a nil is passed in", ^{
+            expect(^{
+                [expect(nil) test].to.haveValidSnapshot() ;
+            }).to.raise(@"Nil was passed into haveValidSnapshot. snapshots_with_a_view_controller_Raises_when_a_nil_is_passed_in");
+        });
     });
 });
 

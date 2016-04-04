@@ -14,4 +14,6 @@ Pod::Spec.new do |s|
   s.dependency     'FBSnapshotTestCase/Core', '~> 2.0'
   s.dependency     'Expecta', '~> 1.0'
   s.dependency     'Specta', '~> 1.0'
+  
+  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
 end

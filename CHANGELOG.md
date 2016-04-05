@@ -1,4 +1,7 @@
 
+### 3.x (Next)
+* [#36](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/36): Disable bitcode when installed through CocoaPods - [@ealeksandrov](https://github.com/ealeksandrov).
+
 ### 3.0.0 (03/17/2016)
 
 * [#35](https://github.com/dblock/ios-snapshot-test-case-expecta/issues/35): Make FBSnapshotTestCase more open ended with `~> 2.0`

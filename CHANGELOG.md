@@ -11,7 +11,7 @@
 
 ### 1.3.4 (05/16/2015)
 
-* Fixes a bad release, see [#30](https://github.com/dblock/ios-snapshot-test-case-expecta/issue/30).
+* Fixes a bad release, see [#30](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/30).
 
 ### 1.3.3 (05/11/2015)
 

@@ -25,7 +25,8 @@
     snapshotController.recordMode = record;
     snapshotController.referenceImagesDirectory = referenceDirectory;
     snapshotController.usesDrawViewHierarchyInRect = [Expecta usesDrawViewHierarchyInRect];
-
+    snapshotController.deviceAgnostic = [Expecta isDeviceAgnostic];
+  
     if (! snapshotController.referenceImagesDirectory) {
         [NSException raise:@"Missing value for referenceImagesDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];
     }
@@ -91,6 +92,7 @@ void setGlobalReferenceImageDir(char *reference) {
     [NSException raise:@"Could not infer reference image folder" format:@"You should provide a reference dir using setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);"];
     return nil;
 }
+
 @end
 
 
@@ -160,7 +162,6 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
 
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-
         // For view controllers do the viewWill/viewDid dance, then pass view through
         if ([actual isKindOfClass:UIViewController.class]) {
 
@@ -244,7 +245,6 @@ EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
 
     match(^BOOL{
         NSString *referenceImageDir = [self _getDefaultReferenceDirectory];
-
         // For view controllers do the viewWill/viewDid dance, then pass view through
         if ([actual isKindOfClass:UIViewController.class]) {
             [actual beginAppearanceTransition:YES animated:NO];

@@ -10,6 +10,7 @@
 #include <Specta/Specta.h>
 #include <Expecta/Expecta.h>
 #include <Expecta+Snapshots/EXPMatchers+FBSnapshotTest.h>
+#import <FBSnapshotTestCase/FBSnapshotTestCasePlatform.h>
 
 #include "FBExampleView.h"
 #import "FBViewController.h"
@@ -191,6 +192,72 @@ describe(@"snapshots", ^{
             }).to.raise(@"Nil was passed into haveValidSnapshot. snapshots_with_a_view_controller_Raises_when_a_nil_is_passed_in");
         });
     });
+  
+  describe(@"device agnostic", ^{
+    
+    __block FBViewController *controller;
+    
+    before(^{
+      controller = [[FBRedViewController alloc] init];
+      controller.view.frame = frame;
+      [Expecta setDeviceAgnostic:TRUE];
+    });
+    
+    after(^{
+      [Expecta setDeviceAgnostic:FALSE];
+    });
+    
+    describe(@"recording", ^{
+      
+      it(@"named", ^{
+        expect(controller).toNot.recordSnapshotNamed(@"view controller 1");
+        expect(controller.viewWillAppearCalled).to.beTruthy();
+        expect(controller.viewDidAppearCalled).to.beTruthy();
+        NSString *imageName = [[fileManager contentsOfDirectoryAtPath:imagesDirectory error:nil] firstObject];
+        NSString *expectedImageName = FBDeviceAgnosticNormalizedFileName(@"view controller 1");
+        expect(imageName).to.contain(expectedImageName);
+      });
+      
+      it(@"unnamed", ^{
+        expect(controller).toNot.recordSnapshot();
+        expect(controller.viewWillAppearCalled).to.beTruthy();
+        expect(controller.viewDidAppearCalled).to.beTruthy();
+        NSString *imageName = [[fileManager contentsOfDirectoryAtPath:imagesDirectory error:nil] firstObject];
+        NSString *expectedImageName = FBDeviceAgnosticNormalizedFileName(@"snapshots_device_agnostic_recording_unnamed");
+        expect(imageName).to.contain(expectedImageName);
+      });
+      
+    });
+    
+    describe(@"unnamed", ^{
+      
+      describe(@"named", ^{
+        
+        it(@"matches view controller", ^{
+          expect(controller).toNot.recordSnapshotNamed(@"view controller 2");
+          
+          FBViewController *newVC = [[FBRedViewController alloc] init];
+          newVC.view.frame = frame;
+          expect(newVC).to.haveValidSnapshotNamed(@"view controller 2");
+          expect(newVC.viewWillAppearCalled).to.beTruthy();
+          expect(newVC.viewDidAppearCalled).to.beTruthy();
+        });
+        
+      });
+      
+      it(@"matches view controller", ^{
+        expect(controller).toNot.recordSnapshot();
+        
+        FBViewController *newVC = [[FBRedViewController alloc] init];
+        newVC.view.frame = frame;
+        expect(newVC).to.haveValidSnapshot();
+        expect(newVC.viewWillAppearCalled).to.beTruthy();
+        expect(newVC.viewDidAppearCalled).to.beTruthy();
+      });
+      
+    });
+    
+  });
 });
 
 SpecEnd

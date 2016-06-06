@@ -80,7 +80,7 @@ void setGlobalReferenceImageDir(char *reference) {
     NSString *testFileName = [NSString stringWithCString:self.fileName encoding:NSUTF8StringEncoding];
     NSArray *pathComponents = [testFileName pathComponents];
 
-    for (NSString *folder in pathComponents) {
+    for (NSString *folder in pathComponents.reverseObjectEnumerator) {
         if ([folder.lowercaseString rangeOfString:@"tests"].location != NSNotFound) {
 
             NSArray *folderPathComponents = [pathComponents subarrayWithRange:NSMakeRange(0, [pathComponents indexOfObject:folder] + 1)];

@@ -80,13 +80,30 @@ void setGlobalReferenceImageDir(char *reference) {
     NSString *testFileName = [NSString stringWithCString:self.fileName encoding:NSUTF8StringEncoding];
     NSArray *pathComponents = [testFileName pathComponents];
 
+    NSString *firstFolderFound = nil;
+
     for (NSString *folder in pathComponents.reverseObjectEnumerator) {
         if ([folder.lowercaseString rangeOfString:@"tests"].location != NSNotFound) {
-
             NSArray *folderPathComponents = [pathComponents subarrayWithRange:NSMakeRange(0, [pathComponents indexOfObject:folder] + 1)];
-            return [NSString stringWithFormat:@"%@/ReferenceImages", [folderPathComponents componentsJoinedByString:@"/"]];
+            NSString *referenceImagesPath = [NSString stringWithFormat:@"%@/ReferenceImages", [folderPathComponents componentsJoinedByString:@"/"]];
 
+            if (!firstFolderFound) {
+                firstFolderFound = referenceImagesPath;
+            }
+
+            BOOL isDirectory = NO;
+            BOOL referenceDirExists = [[NSFileManager defaultManager] fileExistsAtPath:referenceImagesPath isDirectory:&isDirectory];
+
+            // if the folder exists, this is the reference dir for sure
+            if (referenceDirExists && isDirectory) {
+                return referenceImagesPath;
+            }
         }
+    }
+
+    // if a reference folder wasn't found, we should create one
+    if (firstFolderFound) {
+        return firstFolderFound;
     }
 
     [NSException raise:@"Could not infer reference image folder" format:@"You should provide a reference dir using setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);"];

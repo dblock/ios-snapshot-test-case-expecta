@@ -1,6 +1,7 @@
 
 ### 3.x (Next)
 * [#36](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/36): Disable bitcode when installed through CocoaPods - [@ealeksandrov](https://github.com/ealeksandrov).
+* [#43](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/43): Flaky tests on i386 simulator devices - [@dragvs](https://github.com/dragvs).
 
 ### 3.0.0 (03/17/2016)
 

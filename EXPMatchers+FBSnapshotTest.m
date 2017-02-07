@@ -137,7 +137,7 @@ EXPMatcherImplementationBegin(haveValidSnapshot, (void)){
     __block NSError *error = nil;
 
     prerequisite(^BOOL{
-        return actual;
+        return actual != nil;
     });
 
 
@@ -174,7 +174,7 @@ EXPMatcherImplementationBegin(recordSnapshot, (void)) {
     BOOL actualIsViewLayerOrViewController = ([actual isKindOfClass:UIView.class] || [actual isKindOfClass:CALayer.class] || [actual isKindOfClass:UIViewController.class]);
 
     prerequisite(^BOOL{
-        return actual && actualIsViewLayerOrViewController;
+        return actual != nil && actualIsViewLayerOrViewController;
     });
 
     match(^BOOL{
@@ -221,7 +221,7 @@ EXPMatcherImplementationBegin(haveValidSnapshotNamed, (NSString *snapshot)){
     __block NSError *error = nil;
 
     prerequisite(^BOOL{
-        return actual && !(snapshotIsNil);
+        return actual != nil && !(snapshotIsNil);
     });
 
     match(^BOOL{
@@ -257,7 +257,7 @@ EXPMatcherImplementationBegin(recordSnapshotNamed, (NSString *snapshot)) {
     id actualRef = actual;
 
     prerequisite(^BOOL{
-        return actualRef && snapshotExists && actualIsViewLayerOrViewController;
+        return actualRef != nil && snapshotExists && actualIsViewLayerOrViewController;
     });
 
     match(^BOOL{

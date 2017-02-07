@@ -21,6 +21,9 @@ XCTAssertNoThrow((expr))
 
 #import "EXPExpect+Test.h"
 
+#import <malloc/malloc.h>
+#import <objc/runtime.h>
+
 SpecBegin(FBExampleView)
 
 __block CGRect frame = CGRectMake(0, 0, 64, 64);
@@ -258,6 +261,40 @@ describe(@"snapshots", ^{
     });
     
   });
+    
+    it(@"matches view with 256 bytes aligned pointer", ^{
+        Class viewClass = [UIView class];
+        size_t viewInstanceSize = class_getInstanceSize(viewClass);
+        void *ptr = calloc(255 + viewInstanceSize, 1);
+        void *alignedPtr = nil;
+        
+        for (int i = 0; i < 256; ++i) {
+            signed char ptrVal = (signed char)(ptr + i);
+            
+            if (ptrVal == 0) {
+                alignedPtr = ptr + i;
+            }
+        }
+        
+        UIView *view;
+        
+        @autoreleasepool {
+            if (alignedPtr) {
+                id result = (__bridge_transfer id)alignedPtr;
+                object_setClass(result, viewClass);
+                
+                view = [result initWithFrame:frame];
+                CFRetain((__bridge CFTypeRef)view); // prevent ARC from deallocation
+            }
+            
+            expect(view).toNot.recordSnapshot();
+            expect(view).to.haveValidSnapshot();
+            
+//            [view dealloc]; // should be called manually
+        }
+        
+        free(ptr);
+    });
 });
 
 SpecEnd

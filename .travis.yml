@@ -1,9 +1,10 @@
 language: objective-c
 rvm: 2
-osx_image: xcode7
+osx_image: xcode7.3
 
 before_script:
   - export LANG=en_US.UTF-8
+  - travis_wait 15 bundle exec pod repo update --silent
   - bundle install
   - cd FBSnapshotTestCaseDemo
   - bundle exec pod install

@@ -8,7 +8,9 @@ There're no particular rules about when to release Expecta+Snapshots. Release bu
 Run tests, check that all tests succeed locally.
 
 ```
-make all
+cd FBSnapshotTestCaseDemo
+bundle exec pod install
+xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'name=iPhone 6' build test | xcpretty -c
 ```
 
 Check that the last build succeeded in [Travis CI](https://travis-ci.org/dblock/ios-snapshot-test-case-expecta).

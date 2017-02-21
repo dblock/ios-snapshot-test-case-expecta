@@ -1,7 +1,9 @@
 
 ### 3.x (Next)
 
-* [#45](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/45): Add support for approximation - [@leoformaggio](https://github.com/leoformaggio).
+### 3.3.0 (02/21/2017)
+
+* [#45](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/45): Add support for image approximation - [@leoformaggio](https://github.com/leoformaggio).
 
 ### 3.0.1 (02/7/2017)
 

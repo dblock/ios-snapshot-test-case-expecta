@@ -1,3 +1,4 @@
+#import <CoreGraphics/CoreGraphics.h>
 #import <Expecta/Expecta.h>
 #import "ExpectaObject+FBSnapshotTest.h"
 

@@ -1,6 +1,8 @@
 
 ### 3.x (Next)
 
+* [#46](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/46): Add missing import of CoreGraphics framework - [@leoformaggio](https://github.com/leoformaggio).
+
 ### 3.3.0 (02/21/2017)
 
 * [#45](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/45): Add support for image approximation - [@leoformaggio](https://github.com/leoformaggio).

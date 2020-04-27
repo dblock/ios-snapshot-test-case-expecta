@@ -1,9 +1,46 @@
 source 'https://github.com/artsy/Specs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '8.0'
+platform :ios, '10.0'
 
 target 'FBSnapshotTestCaseDemoTests' do
+  use_frameworks!
   pod 'Specta'
   pod 'Expecta+Snapshots', :path => "../"
+end
+
+# Cocoapods bug with static linking and iOSSnapshotTestCase
+# https://github.com/CocoaPods/CocoaPods/issues/8231
+post_install do |installer|
+  def merge_and_link_dirs(source, destination)
+      if File.symlink?(source) then
+          puts "File is a symlink #{source}"
+          return
+      end
+
+      if File.directory?(source) then
+        puts "Moving #{source}"
+        system "mv #{source}/* #{destination}"
+        puts "Removing #{source}"
+        Dir.rmdir(source)
+      end
+
+      puts "Symlinking #{destination} to #{source}"
+      system "ln -s #{destination} #{source}"
+      # File.symlink(destination, source)
+  end
+
+  headers_dir = installer.config.project_pods_root + 'Headers/'
+
+  # Work around for FBSnapshotTestCase with static linking.
+  # This is needed because of buggy handling of the differing module and project names.
+  # NOTE: Uncomment to resolve the build failure
+  #Dir.chdir(headers_dir + "Private/") do
+  #    puts "Merge Private"
+  #    merge_and_link_dirs('FBSnapshotTestCase', 'iOSSnapshotTestCase')
+  #end
+  #Dir.chdir(headers_dir + "Public/") do
+  #  puts "Merge Public"
+  #  merge_and_link_dirs('FBSnapshotTestCase', 'iOSSnapshotTestCase')
+  #end
 end

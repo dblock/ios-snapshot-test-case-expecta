@@ -25,7 +25,7 @@
     snapshotController.recordMode = record;
     snapshotController.referenceImagesDirectory = referenceDirectory;
     snapshotController.usesDrawViewHierarchyInRect = [Expecta usesDrawViewHierarchyInRect];
-    snapshotController.deviceAgnostic = [Expecta isDeviceAgnostic];
+    // snapshotController.deviceAgnostic = [Expecta isDeviceAgnostic];
   
     if (! snapshotController.referenceImagesDirectory) {
         [NSException raise:@"Missing value for referenceImagesDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];
@@ -34,7 +34,7 @@
     return [snapshotController compareSnapshotOfViewOrLayer:viewOrLayer
                                                    selector:NSSelectorFromString(snapshot)
                                                  identifier:nil
-                                                  tolerance:tolerance
+                                           overallTolerance:tolerance
                                                       error:error];
 }
 

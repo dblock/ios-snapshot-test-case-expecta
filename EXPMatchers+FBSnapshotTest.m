@@ -25,7 +25,7 @@
     snapshotController.recordMode = record;
     snapshotController.referenceImagesDirectory = referenceDirectory;
     snapshotController.usesDrawViewHierarchyInRect = [Expecta usesDrawViewHierarchyInRect];
-    // snapshotController.deviceAgnostic = [Expecta isDeviceAgnostic];
+    snapshotController.fileNameOptions = FBSnapshotTestCaseFileNameIncludeOptionNone;
   
     if (! snapshotController.referenceImagesDirectory) {
         [NSException raise:@"Missing value for referenceImagesDirectory" format:@"Call [[EXPExpectFBSnapshotTest instance] setReferenceImagesDirectory"];

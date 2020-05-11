@@ -54,7 +54,7 @@ describe(@"snapshots", ^{
             it(@"named", ^{
                 expect(view).toNot.recordSnapshotNamed(@"view 1"); // Using "toNot" because recording always causes the test to fail.
                 NSString *imageName = [[fileManager contentsOfDirectoryAtPath:imagesDirectory error:nil] firstObject];
-                expect(imageName).to.contain(@"view_1");
+                expect(imageName).to.contain(@"view 1");
             });
 
             it(@"unnamed", ^{
@@ -116,7 +116,7 @@ describe(@"snapshots", ^{
                 expect(controller.viewWillAppearCalled).to.beTruthy();
                 expect(controller.viewDidAppearCalled).to.beTruthy();
                 NSString *imageName = [[fileManager contentsOfDirectoryAtPath:imagesDirectory error:nil] firstObject];
-                expect(imageName).to.contain(@"view_controller_1");
+                expect(imageName).to.contain(@"view controller 1");
             });
 
 
@@ -217,8 +217,7 @@ describe(@"snapshots", ^{
         expect(controller.viewWillAppearCalled).to.beTruthy();
         expect(controller.viewDidAppearCalled).to.beTruthy();
         NSString *imageName = [[fileManager contentsOfDirectoryAtPath:imagesDirectory error:nil] firstObject];
-        NSString *expectedImageName = FBFileNameIncludeNormalizedFileNameFromOption(@"view_controller_1", 0);
-        expect(imageName).to.contain(expectedImageName);
+        expect(imageName).to.contain(@"view controller 1");
       });
       
       it(@"unnamed", ^{

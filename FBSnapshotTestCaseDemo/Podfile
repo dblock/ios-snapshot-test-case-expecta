@@ -32,7 +32,7 @@ post_install do |installer|
     end
 
     # Cocoapods stomps all over changes to the Private headers in its post-integrate step
-    # Remove this and move to the hook for that step when 1.10 is available.
+    # Remove this and move to the post-integrate hook when cocoapods 1.10 is available.
     system "mv #{headers_dir}/Private/iOSSnapshotTestCase/* #{headers_dir}/Public/iOSSnapshotTestCase"
     # Dir.chdir(headers_dir + "Private/") do
     #     puts "Merge Private"

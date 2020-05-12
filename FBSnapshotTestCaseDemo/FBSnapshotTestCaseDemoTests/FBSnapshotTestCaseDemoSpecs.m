@@ -9,7 +9,7 @@
 #define EXP_SHORTHAND
 #include <Specta/Specta.h>
 #include <Expecta/Expecta.h>
-#include <Expecta+Snapshots/EXPMatchers+FBSnapshotTest.h>
+#include <Expecta_Snapshots/EXPMatchers+FBSnapshotTest.h>
 #import <FBSnapshotTestCase/FBSnapshotTestCasePlatform.h>
 
 #include "FBExampleView.h"
@@ -217,8 +217,7 @@ describe(@"snapshots", ^{
         expect(controller.viewWillAppearCalled).to.beTruthy();
         expect(controller.viewDidAppearCalled).to.beTruthy();
         NSString *imageName = [[fileManager contentsOfDirectoryAtPath:imagesDirectory error:nil] firstObject];
-        NSString *expectedImageName = FBDeviceAgnosticNormalizedFileName(@"view controller 1");
-        expect(imageName).to.contain(expectedImageName);
+        expect(imageName).to.contain(@"view controller 1");
       });
       
       it(@"unnamed", ^{
@@ -226,7 +225,7 @@ describe(@"snapshots", ^{
         expect(controller.viewWillAppearCalled).to.beTruthy();
         expect(controller.viewDidAppearCalled).to.beTruthy();
         NSString *imageName = [[fileManager contentsOfDirectoryAtPath:imagesDirectory error:nil] firstObject];
-        NSString *expectedImageName = FBDeviceAgnosticNormalizedFileName(@"snapshots_device_agnostic_recording_unnamed");
+        NSString *expectedImageName = FBFileNameIncludeNormalizedFileNameFromOption(@"snapshots_device_agnostic_recording_unnamed", 0);
         expect(imageName).to.contain(expectedImageName);
       });
       

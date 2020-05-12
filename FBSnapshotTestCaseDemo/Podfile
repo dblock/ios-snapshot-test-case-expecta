@@ -6,8 +6,6 @@ target 'FBSnapshotTestCaseDemoTests' do
   pod 'Expecta+Snapshots', :path => "../"
 end
 
-# Cocoapods bug with static linking and iOSSnapshotTestCase
-# https://github.com/CocoaPods/CocoaPods/issues/8231
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|

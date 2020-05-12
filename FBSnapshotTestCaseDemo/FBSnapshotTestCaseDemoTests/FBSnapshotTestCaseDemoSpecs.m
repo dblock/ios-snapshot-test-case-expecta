@@ -9,7 +9,7 @@
 #define EXP_SHORTHAND
 #include <Specta/Specta.h>
 #include <Expecta/Expecta.h>
-#include <Expecta+Snapshots/EXPMatchers+FBSnapshotTest.h>
+#include <Expecta_Snapshots/EXPMatchers+FBSnapshotTest.h>
 #import <FBSnapshotTestCase/FBSnapshotTestCasePlatform.h>
 
 #include "FBExampleView.h"

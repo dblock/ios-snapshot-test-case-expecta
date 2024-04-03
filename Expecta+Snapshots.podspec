@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files = '*.{h,m}'
   s.frameworks   = 'Foundation', 'XCTest'
-  s.dependency     'iOSSnapshotTestCase', '~> 6.2'
+  s.dependency     'iOSSnapshotTestCase', '~> 8.0'
   s.dependency     'Expecta', '~> 1.0'
   s.dependency     'Specta', '~> 2.0'
   

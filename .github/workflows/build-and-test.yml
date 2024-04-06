@@ -31,4 +31,4 @@ jobs:
     - name: Build and test
       run: |
         cd FBSnapshotTestCaseDemo
-        xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' build test | xcpretty -c && exit ${PIPESTATUS[0]}
+        xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' build test | bundle exec xcpretty -c && exit ${PIPESTATUS[0]}

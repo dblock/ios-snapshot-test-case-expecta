@@ -17,14 +17,14 @@ jobs:
       with:
         xcode-version: '15.2'
 
-    - name: Set up Ruby
+    - name: Set up Ruby and install gems
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3
+        ruby-version: '3.3'
+        bundler-cache: true
 
-    - name: Install dependencies
+    - name: Install pods
       run: |
-        bundle install
         cd FBSnapshotTestCaseDemo
         bundle exec pod install
 

@@ -16,12 +16,6 @@ jobs:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: '15.2'
-    
-    - name: Verify Xcode Version
-      run: xcodebuild -version
-    
-    - name: List available simulators
-      run: xcrun simctl list devices available
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1

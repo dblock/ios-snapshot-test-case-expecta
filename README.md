@@ -3,7 +3,7 @@ Expecta Matchers for FBSnapshotTestCase
 
 [Expecta](https://github.com/specta/expecta) matchers for [ios-snapshot-test-case](https://github.com/facebook/ios-snapshot-test-case).
 
-[![Build Status](https://travis-ci.org/dblock/ios-snapshot-test-case-expecta.svg)](https://travis-ci.org/dblock/ios-snapshot-test-case-expecta)
+[![Build and test](https://github.com/dblock/ios-snapshot-test-case-expecta/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/dblock/ios-snapshot-test-case-expecta/actions/workflows/build-and-test.yml)
 
 ### Usage
 

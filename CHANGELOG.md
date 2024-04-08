@@ -1,6 +1,7 @@
 
 ### 3.x (Next)
 
+* [#49](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/49): Migrate CI to GitHub actions - [@brainbicycle](https://github.com/brainbicycle).
 
 ### 3.1.1 (02/25/2017)
 

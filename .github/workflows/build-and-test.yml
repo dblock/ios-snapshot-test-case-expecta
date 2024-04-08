@@ -1,0 +1,29 @@
+name: Build and test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '15.2'
+
+    - name: Set up Ruby and install gems
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+        bundler-cache: true
+
+    - name: Install pods
+      run: |
+        cd FBSnapshotTestCaseDemo
+        bundle exec pod install
+
+    - name: Build and test
+      run: |
+        cd FBSnapshotTestCaseDemo
+        xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' build test | bundle exec xcpretty -c && exit ${PIPESTATUS[0]}

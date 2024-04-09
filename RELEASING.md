@@ -13,7 +13,9 @@ bundle exec pod install
 xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'name=iPhone 15' build test | bundle exec xcpretty -c
 ```
 
-Check that the last build succeeded in [GitHub Actions](https://github.com/dblock/ios-snapshot-test-case-expecta/actions/workflows/build-and-test.yml).
+Check that the last build succeeded:
+
+[![Build and test](https://github.com/dblock/ios-snapshot-test-case-expecta/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/dblock/ios-snapshot-test-case-expecta/actions/workflows/build-and-test.yml)
 
 Increment the version, modify [Expecta+Snapshots.podspec](Expecta+Snapshots.podspec).
 

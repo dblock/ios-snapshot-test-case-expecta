@@ -35,12 +35,12 @@ Install dependencies via CocoaPods for the demo project.
 
 ```
 cd FBSnapshotTestCaseDemo
-pod install
+bundle exec pod install
 ```
 
 #### Open Workspace
 
-Open the ios-snapshot-test-case-expecta.xcworkspace workspace in XCode.
+Open the ios-snapshot-test-case-expecta.xcworkspace workspace in Xcode.
 
 #### Write Tests
 
@@ -55,7 +55,9 @@ Implement your feature or bug fix.
 Make sure that you can build the project and run all tests successfully.
 
 ```
-make all
+cd FBSnapshotTestCaseDemo
+bundle exec pod install
+xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'name=iPhone 15' build test | bundle exec xcpretty -c
 ```
 
 #### Write Documentation
@@ -119,7 +121,7 @@ git push origin my-feature-branch -f
 
 #### Check on Your Pull Request
 
-Go back to your pull request after a few minutes and see whether it passed muster with Travis-CI. Everything should look green, otherwise fix issues and amend your commit as described above.
+Go back to your pull request after a few minutes and see whether it passed muster with CI. Everything should look green, otherwise fix issues and amend your commit as described above.
 
 #### Be Patient
 

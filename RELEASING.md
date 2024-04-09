@@ -10,10 +10,10 @@ Run tests, check that all tests succeed locally.
 ```
 cd FBSnapshotTestCaseDemo
 bundle exec pod install
-xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'name=iPhone 6' build test | xcpretty -c
+xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'name=iPhone 15' build test | bundle exec xcpretty -c
 ```
 
-Check that the last build succeeded in [Travis CI](https://travis-ci.org/dblock/ios-snapshot-test-case-expecta).
+Check that the last build succeeded in [GitHub Actions](https://github.com/dblock/ios-snapshot-test-case-expecta/actions/workflows/build-and-test.yml).
 
 Increment the version, modify [Expecta+Snapshots.podspec](Expecta+Snapshots.podspec).
 
@@ -32,7 +32,7 @@ Remove the line with "Your contribution here.", since there will be no more cont
 Make sure the library is ready for release.
 
 ```
-pod lib lint
+bundle exec pod lib lint
 ```
 
 Commit your changes.

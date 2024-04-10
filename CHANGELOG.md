@@ -1,5 +1,5 @@
 
-### 3.x (Next)
+### 3.2.0 (04/10/2024)
 
 * [#48](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/48): Support Specta 2.0 - [@brainbicycle](https://github.com/brainbicycle).
 * [#49](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/49): Migrate CI to GitHub actions - [@brainbicycle](https://github.com/brainbicycle).

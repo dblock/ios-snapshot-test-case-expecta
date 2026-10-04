@@ -1,6 +1,7 @@
 ### 3.x (Next)
 
 * Your contribution here.
+* Reduce CI overhead by overlapping simulator startup with dependency setup, selecting ARM64 explicitly, avoiding redundant build actions and duplicate branch runs - [@dblock](https://github.com/dblock).
 * [#59](https://github.com/dblock/ios-snapshot-test-case-expecta/pull/59): Modernize CI to macOS 15, Xcode 16.4 and Ruby 3.3.12; update build tooling and preserve failed test results - [@dblock](https://github.com/dblock).
 
 ### 3.2.0 (04/10/2024)

@@ -62,12 +62,14 @@ bundle exec pod install
 set -o pipefail
 xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace \
   -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.5' \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.5,arch=arm64' \
   -resultBundlePath TestResults.xcresult \
-  build test | bundle exec xcpretty -c
+  test | bundle exec xcpretty -c
 ```
 
 Use a fresh result-bundle path for each run. CI uploads the `.xcresult` bundle when a build or test fails; open it in Xcode to inspect the failure.
+
+The `test` action also builds the app and test bundle. On an Intel Mac, use `arch=x86_64` instead. CI starts the simulator before installing dependencies so its first boot can overlap with setup, then waits for it in a separate step before building and testing. CI runs on pull requests and pushes to `master`, and cancels superseded runs on the same ref.
 
 #### Write Documentation
 

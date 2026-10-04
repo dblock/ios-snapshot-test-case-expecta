@@ -27,6 +27,8 @@ git checkout -b my-feature-branch
 
 Install CocoaPods via Ruby Bundler.
 
+CI uses macOS 15, Xcode 16.4, Ruby 3.3.12 and the iOS 18.5 iPhone 16 simulator. Install the matching simulator runtime in Xcode to run the same tests locally. The library's minimum supported iOS version remains 14.0.
+
 ```
 bundle install
 ```
@@ -40,7 +42,7 @@ bundle exec pod install
 
 #### Open Workspace
 
-Open the ios-snapshot-test-case-expecta.xcworkspace workspace in Xcode.
+Open the FBSnapshotTestCaseDemo/FBSnapshotTestCaseDemo.xcworkspace workspace in Xcode.
 
 #### Write Tests
 
@@ -57,8 +59,15 @@ Make sure that you can build the project and run all tests successfully.
 ```
 cd FBSnapshotTestCaseDemo
 bundle exec pod install
-xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'name=iPhone 15' build test | bundle exec xcpretty -c
+set -o pipefail
+xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace \
+  -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.5' \
+  -resultBundlePath TestResults.xcresult \
+  build test | bundle exec xcpretty -c
 ```
+
+Use a fresh result-bundle path for each run. CI uploads the `.xcresult` bundle when a build or test fails; open it in Xcode to inspect the failure.
 
 #### Write Documentation
 

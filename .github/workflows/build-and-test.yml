@@ -2,20 +2,24 @@ name: Build and test
 
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
+    timeout-minutes: 30
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v5
 
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '15.2'
+        xcode-version: '16.4'
 
     - name: Set up Ruby and install gems
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.3'
+        ruby-version: '3.3.12'
         bundler-cache: true
 
     - name: Install pods
@@ -23,7 +27,29 @@ jobs:
         cd FBSnapshotTestCaseDemo
         bundle exec pod install
 
-    - name: Build and test
+    - name: Boot simulator
       run: |
+        xcodebuild -runFirstLaunch
+        xcrun simctl list devices available --json > "$RUNNER_TEMP/simulators.json"
+        device_id=$(jq -er '.devices["com.apple.CoreSimulator.SimRuntime.iOS-18-5"][]
+          | select(.name == "iPhone 16") | .udid' "$RUNNER_TEMP/simulators.json")
+        xcrun simctl bootstatus "$device_id" -b
+
+    - name: Build and test
+      shell: bash
+      run: |
+        set -o pipefail
         cd FBSnapshotTestCaseDemo
-        xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' build test | bundle exec xcpretty -c && exit ${PIPESTATUS[0]}
+        xcodebuild -workspace FBSnapshotTestCaseDemo.xcworkspace \
+          -scheme FBSnapshotTestCaseDemo -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.5' \
+          -resultBundlePath TestResults.xcresult \
+          build test | bundle exec xcpretty -c
+
+    - name: Upload failed test results
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: FBSnapshotTestCaseDemo/TestResults.xcresult
+        if-no-files-found: warn
